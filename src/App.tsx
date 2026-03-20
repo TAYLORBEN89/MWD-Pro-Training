@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, Component, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import ReactMarkdown from 'react-markdown';
 import { 
   BookOpen, 
   GraduationCap, 
@@ -16,7 +17,8 @@ import {
   History,
   Award,
   AlertCircle,
-  RefreshCcw
+  RefreshCcw,
+  PlayCircle
 } from 'lucide-react';
 import { mwdCurriculum } from './data/mwdData';
 import { CurriculumSection, QuizQuestion } from './types';
@@ -206,45 +208,94 @@ export default function App() {
                 <span className="text-xs font-bold uppercase tracking-widest">Curriculum</span>
               </div>
 
+              {/* Overall Progress Bar */}
+              <div className="bg-white p-4 rounded-2xl border border-zinc-100 shadow-sm mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold text-zinc-500 uppercase tracking-tighter">Your Progress</span>
+                  <span className="text-xs font-bold text-emerald-600">{Math.round((mwdCurriculum.findIndex(s => s.id === currentSectionId) + 1) / mwdCurriculum.length * 100) || 0}% Complete</span>
+                </div>
+                <div className="h-2 bg-zinc-100 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${((mwdCurriculum.findIndex(s => s.id === currentSectionId) + 1) / mwdCurriculum.length) * 100 || 0}%` }}
+                    className="h-full bg-emerald-500"
+                  />
+                </div>
+              </div>
+
               {currentSection ? (
-                <div className="space-y-6">
-                  <button 
-                    onClick={() => setCurrentSectionId(null)}
-                    className="flex items-center gap-1 text-sm font-medium text-zinc-500"
-                  >
-                    <ChevronLeft size={16} /> Back to list
-                  </button>
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-bold">{currentSection.title}</h2>
-                    <div className="prose prose-zinc leading-relaxed text-zinc-600 whitespace-pre-wrap">
-                      {currentSection.content}
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-8"
+                >
+                  <div className="flex items-center justify-between">
+                    <button 
+                      onClick={() => setCurrentSectionId(null)}
+                      className="flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors bg-zinc-100 px-4 py-2 rounded-full"
+                    >
+                      <ChevronLeft size={18} /> Back to Modules
+                    </button>
+                    <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 px-4 py-2 rounded-full">
+                      <BookOpen size={16} />
+                      <span className="text-xs font-bold uppercase tracking-wider">Module {mwdCurriculum.findIndex(s => s.id === currentSection.id) + 1}</span>
                     </div>
                   </div>
-                  <button 
-                    onClick={() => startQuiz(currentSection)}
-                    className="w-full btn-primary flex items-center justify-center gap-2"
-                  >
-                    Take Section Quiz <ChevronRight size={18} />
-                  </button>
-                </div>
+
+                  <div className="space-y-6">
+                    <h2 className="text-3xl font-bold tracking-tight text-zinc-900 leading-tight">{currentSection.title}</h2>
+                    
+                    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-zinc-100">
+                      <div className="prose prose-zinc prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-zinc-600 prose-p:leading-relaxed prose-li:text-zinc-600 prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-hr:border-zinc-100 max-w-none">
+                        <ReactMarkdown>{currentSection.content}</ReactMarkdown>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center pt-4 pb-12">
+                    <button 
+                      onClick={() => startQuiz(currentSection)}
+                      className="group flex items-center gap-3 bg-zinc-900 text-white px-10 py-5 rounded-2xl font-bold hover:bg-emerald-600 transition-all shadow-xl shadow-zinc-200 active:scale-95"
+                    >
+                      <PlayCircle size={24} />
+                      Start Module Quiz
+                      <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </motion.div>
               ) : (
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-bold">Training Modules</h2>
-                  <p className="text-sm text-zinc-500 mb-4">Complete all 15 sections to earn your MWD Certification.</p>
-                  <div className="grid gap-3">
+                <div className="space-y-6">
+                  <div className="space-y-1">
+                    <h2 className="text-3xl font-bold tracking-tight">Training Modules</h2>
+                    <p className="text-sm text-zinc-500">Complete all 15 sections to earn your MWD Certification.</p>
+                  </div>
+                  
+                  <div className="grid gap-4">
                     {mwdCurriculum.map((section, index) => (
                       <button 
                         key={section.id}
                         onClick={() => setCurrentSectionId(section.id)}
-                        className="apple-card p-5 flex items-center justify-between group"
+                        className="group relative bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-md hover:border-emerald-100 transition-all text-left overflow-hidden active:scale-[0.98]"
                       >
-                        <div className="flex items-center gap-4">
-                          <span className="text-xs font-bold text-zinc-300 w-4">{index + 1}</span>
-                          <span className="font-semibold text-left">{section.title}</span>
+                        <div className="flex items-center gap-5">
+                          <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center text-zinc-400 font-bold group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors shrink-0">
+                            {index + 1}
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-bold text-zinc-900 group-hover:text-emerald-700 transition-colors">{section.title}</h3>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Module {index + 1}</span>
+                              <div className="w-1 h-1 rounded-full bg-zinc-200" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Available</span>
+                            </div>
+                          </div>
+                          <div className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all shrink-0">
+                            <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+                          </div>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-zinc-50 flex items-center justify-center group-hover:bg-zinc-900 group-hover:text-white transition-colors shrink-0">
-                          <ChevronRight size={16} />
-                        </div>
+                        
+                        {/* Subtle background accent */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-emerald-500/10 transition-colors" />
                       </button>
                     ))}
                   </div>

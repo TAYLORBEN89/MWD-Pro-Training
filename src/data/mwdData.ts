@@ -4,93 +4,106 @@ export const mwdCurriculum: CurriculumSection[] = [
   {
     id: 'section-1',
     title: 'Introduction to MWD & Directional Drilling',
-    content: `1.1 What is MWD?
-Measurement While Drilling (MWD) is a downhole measurement system that sends real time data from the bottom of the wellbore to the surface while drilling is in progress. It typically provides:
-• Directional data: inclination, azimuth, toolface
-• Basic formation data: often gamma ray, sometimes other logs
-• Tool and drilling status: downhole temperature, battery status (depending on tool), etc.
-Key idea: MWD lets the rig team steer the wellbore in real time instead of waiting for wireline logs after drilling.
+    content: `### 1.1 What is MWD?
+Measurement While Drilling (MWD) is a downhole measurement system that sends real-time data from the bottom of the wellbore to the surface while drilling is in progress.
 
-1.2 MWD vs LWD vs Wireline
-• MWD (Measurement While Drilling): Focused on directional control and basic formation evaluation while drilling.
-• LWD (Logging While Drilling): More advanced formation evaluation (resistivity, density, neutron, sonic, etc.) while drilling. Often integrated with MWD tools.
-• Wireline logging: Tools are run on a cable after drilling a section. Provides detailed logs but not real time while drilling.
-In practice, people often say “MWD” to refer to the whole downhole telemetry and survey system, even when LWD sensors are present.
+> **Key Idea:** MWD lets the rig team steer the wellbore in real-time instead of waiting for wireline logs after drilling.
 
-1.3 Where MWD fits in directional drilling
+It typically provides:
+*   **Directional data:** inclination, azimuth, toolface
+*   **Basic formation data:** often gamma ray, sometimes other logs
+*   **Tool and drilling status:** downhole temperature, battery status, etc.
+
+---
+
+### 1.2 MWD vs LWD vs Wireline
+*   **MWD (Measurement While Drilling):** Focused on directional control and basic formation evaluation while drilling.
+*   **LWD (Logging While Drilling):** More advanced formation evaluation (resistivity, density, neutron, sonic, etc.) while drilling. Often integrated with MWD tools.
+*   **Wireline logging:** Tools are run on a cable after drilling a section. Provides detailed logs but not real-time while drilling.
+
+---
+
+### 1.3 Where MWD fits in directional drilling
 Directional drilling is about controlling the path of the wellbore to hit a target in 3D space. MWD is the feedback system that tells you:
-• Where the bit is (inclination, azimuth, measured depth)
-• How the well is trending (build, drop, turn)
-• What the formation looks like (gamma, sometimes more)
+1.  **Where the bit is** (inclination, azimuth, measured depth)
+2.  **How the well is trending** (build, drop, turn)
+3.  **What the formation looks like** (gamma, sometimes more)
+
 Without MWD, directional drilling becomes guesswork. With MWD, the directional driller can:
-• Adjust toolface and slide/rotate decisions
-• Stay in the target zone
-• Avoid collisions with nearby wells
+*   Adjust toolface and slide/rotate decisions
+*   Stay in the target zone
+*   Avoid collisions with nearby wells
 
-1.4 Basic directional drilling concepts
-• Measured Depth (MD): The length along the wellbore from surface to the survey point.
-• True Vertical Depth (TVD): The vertical distance from surface to the survey point.
-• Inclination: The angle from vertical (0° = vertical, 90° = horizontal).
-• Azimuth: The compass direction of the wellbore (e.g., 045° = NE).
-• Toolface: The orientation of the bent housing or rotary steerable tool, used to steer the well.
-MWD tools provide the survey data that allows these values to be calculated and monitored.
+---
 
-1.5 Core components of an MWD system
-At a high level, an MWD system includes:
-• Downhole tool string:
-  - MWD tool (sensors, electronics, power system)
-  - Telemetry section (mud pulse, EM, or wired pipe interface)
-  - Sometimes integrated LWD sensors (gamma, resistivity, etc.)
-• Surface equipment:
-  - Surface receiver (pressure transducer for mud pulse, antenna for EM, or wired interface)
-  - Surface decoding system (computer/software)
-  - Displays for surveys, toolface, gamma, and status
-• Rig integration:
-  - Depth tracking system
-  - Rig network
-  - Data export (e.g., WITS/WITSML) to operator and office
+### 1.4 Basic directional drilling concepts
+*   **Measured Depth (MD):** The length along the wellbore from surface to the survey point.
+*   **True Vertical Depth (TVD):** The vertical distance from surface to the survey point.
+*   **Inclination:** The angle from vertical (0° = vertical, 90° = horizontal).
+*   **Azimuth:** The compass direction of the wellbore (e.g., 045° = NE).
+*   **Toolface:** The orientation of the bent housing or rotary steerable tool, used to steer the well.
 
-1.6 Role of the MWD field technician
+---
+
+### 1.5 Core components of an MWD system
+#### Downhole tool string:
+- MWD tool (sensors, electronics, power system)
+- Telemetry section (mud pulse, EM, or wired pipe interface)
+- Sometimes integrated LWD sensors (gamma, resistivity, etc.)
+
+#### Surface equipment:
+- Surface receiver (pressure transducer for mud pulse, antenna for EM, or wired interface)
+- Surface decoding system (computer/software)
+- Displays for surveys, toolface, gamma, and status
+
+#### Rig integration:
+- Depth tracking system
+- Rig network
+- Data export (e.g., WITS/WITSML) to operator and office
+
+---
+
+### 1.6 Role of the MWD field technician
 An MWD field tech is responsible for:
-• Pre run:
-  - Assembling and testing the tool
-  - Programming surveys and telemetry parameters
-  - Verifying communication and surface decoding
-• During the run:
-  - Monitoring real time data (surveys, toolface, gamma, pulses)
-  - Ensuring data quality and reliability
-  - Troubleshooting telemetry or tool issues
-  - Communicating with the directional driller and company representative
-• Post run:
-  - Downloading memory data (if applicable)
-  - Generating final survey reports and logs
-  - Documenting any issues or failures
-Good MWD techs are calm, systematic, and detail oriented. They don’t just watch screens—they interpret what they see and act on it.
 
-1.7 Real time vs memory data
-• Real time data:
-  - Sent via telemetry (mud pulse, EM, wired pipe)
-  - Limited bandwidth → only key parameters are sent
-  - Used for steering and operational decisions
-• Memory data:
-  - Stored in the tool’s internal memory
-  - Downloaded after the run
-  - Higher resolution and more channels
-  - Used for final logs, post run analysis, and QC
-As an MWD tech, you must understand what is available in real time and what will only be seen after the run.
+#### Pre-run:
+- Assembling and testing the tool
+- Programming surveys and telemetry parameters
+- Verifying communication and surface decoding
 
-1.8 Why MWD quality matters
+#### During the run:
+- Monitoring real-time data (surveys, toolface, gamma, pulses)
+- Ensuring data quality and reliability
+- Troubleshooting telemetry or tool issues
+- Communicating with the directional driller and company representative
+
+#### Post-run:
+- Downloading memory data (if applicable)
+- Generating final survey reports and logs
+- Documenting any issues or failures
+
+---
+
+### 1.7 Real-time vs memory data
+*   **Real-time data:** Sent via telemetry (mud pulse, EM, wired pipe). Limited bandwidth → only key parameters are sent. Used for steering and operational decisions.
+*   **Memory data:** Stored in the tool’s internal memory. Downloaded after the run. Higher resolution and more channels. Used for final logs, post-run analysis, and QC.
+
+---
+
+### 1.8 Why MWD quality matters
 Poor MWD data can lead to:
-• Misplaced wells
-• Collisions with nearby wells
-• Poor reservoir contact
-• Lost time and cost overruns
-High quality MWD work means:
-• Accurate surveys
-• Reliable toolface
-• Clean, interpretable gamma logs
-• Clear communication with the rig team
-This section is about building that mindset: you are the guardian of downhole truth.`,
+*   Misplaced wells
+*   Collisions with nearby wells
+*   Poor reservoir contact
+*   Lost time and cost overruns
+
+High-quality MWD work means:
+*   Accurate surveys
+*   Reliable toolface
+*   Clean, interpretable gamma logs
+*   Clear communication with the rig team
+
+**You are the guardian of downhole truth.**`,
     quizQuestions: [
       {
         id: 's1q1',
@@ -414,117 +427,160 @@ This section is about building that mindset: you are the guardian of downhole tr
     title: 'Drilling Mechanics & Downhole Environment',
     content: `This section teaches the trainee what the MWD tool is actually living through downhole. Understanding drilling mechanics is the difference between simply “watching data” and truly diagnosing tool behavior, telemetry issues, and survey quality.
 
-2.1 The Downhole Environment: What the Tool Experiences
+### 2.1 The Downhole Environment: What the Tool Experiences
 MWD tools operate in one of the harshest environments in the oilfield:
-• High temperature (150–175°C common, >175°C in HPHT wells)
-• Extreme vibration (axial, lateral, torsional)
-• Shock events (bit bounce, stalls, string slippage)
-• High hydrostatic pressure
-• Chemical exposure from drilling fluids
-• Continuous mechanical stress from rotation and bending
-Every measurement the tool sends to surface is influenced by these conditions. Understanding them is essential for interpreting data quality and diagnosing failures.
+*   High temperature (150–175°C common, >175°C in HPHT wells)
+*   Extreme vibration (axial, lateral, torsional)
+*   Shock events (bit bounce, stalls, string slippage)
+*   High hydrostatic pressure
+*   Chemical exposure from drilling fluids
+*   Continuous mechanical stress from rotation and bending
 
-2.2 Weight on Bit (WOB)
+> **Key Idea:** Every measurement the tool sends to surface is influenced by these conditions. Understanding them is essential for interpreting data quality and diagnosing failures.
+
+---
+
+### 2.2 Weight on Bit (WOB)
 WOB is the downward force applied to the bit.
-• Too little WOB → slow ROP, inefficient drilling
-• Too much WOB → bit bounce, stick slip, shock, tool damage
+*   Too little WOB → slow ROP, inefficient drilling
+*   Too much WOB → bit bounce, stick slip, shock, tool damage
+
 MWD impact: High WOB often correlates with vibration spikes, toolface instability, and telemetry dropouts.
 
-2.3 Torque & Drag
-• Torque: twisting force required to rotate the drillstring
-• Drag: resistance when sliding or pulling the string
+---
+
+### 2.3 Torque & Drag
+*   **Torque:** twisting force required to rotate the drillstring
+*   **Drag:** resistance when sliding or pulling the string
+
 High torque and drag can indicate:
-• Doglegs
-• Tight hole
-• Poor hole cleaning
-• BHA dysfunction
+*   Doglegs
+*   Tight hole
+*   Poor hole cleaning
+*   BHA dysfunction
+
 MWD impact: Torque spikes often show up as toolface oscillation or erratic surveys.
 
-2.4 RPM (Rotations Per Minute)
+---
+
+### 2.4 RPM (Rotations Per Minute)
 RPM affects:
-• Bit efficiency
-• Vibration levels
-• Motor performance
-• Toolface stability (in rotary mode)
-High RPM → increased lateral vibration Low RPM → increased risk of stick slip
+*   Bit efficiency
+*   Vibration levels
+*   Motor performance
+*   Toolface stability (in rotary mode)
+
+*   **High RPM** → increased lateral vibration
+*   **Low RPM** → increased risk of stick slip
+
 MWD impact: RPM changes can directly affect pulse clarity, toolface, and sensor noise.
 
-2.5 Rate of Penetration (ROP)
-ROP is how fast the bit drills ahead.
-• High ROP → efficient drilling, but can increase cuttings load
-• Low ROP → may indicate dysfunction or poor parameters
-MWD impact: High ROP can bury the tool in cuttings, causing:
-• Telemetry attenuation
-• Gamma lag
-• Temperature rise
+---
 
-2.6 Mud Flow & Hydraulics
+### 2.5 Rate of Penetration (ROP)
+ROP is how fast the bit drills ahead.
+*   **High ROP** → efficient drilling, but can increase cuttings load
+*   **Low ROP** → may indicate dysfunction or poor parameters
+
+MWD impact: High ROP can bury the tool in cuttings, causing:
+*   Telemetry attenuation
+*   Gamma lag
+*   Temperature rise
+
+---
+
+### 2.6 Mud Flow & Hydraulics
 Mud flow is the lifeblood of the MWD system.
+
 Functions:
-• Cool the bit
-• Carry cuttings out
-• Power turbines (if used)
-• Provide the medium for mud pulse telemetry
-Low flow → weak pulses, poor hole cleaning High flow → increased ECD, risk of losses
+*   Cool the bit
+*   Carry cuttings out
+*   Power turbines (if used)
+*   Provide the medium for mud pulse telemetry
+
+*   **Low flow** → weak pulses, poor hole cleaning
+*   **High flow** → increased ECD, risk of losses
+
 MWD impact: Flow changes directly affect pulse amplitude, tool cooling, and turbine power.
 
-2.7 Equivalent Circulating Density (ECD)
+---
+
+### 2.7 Equivalent Circulating Density (ECD)
 ECD is the effective density of the mud while circulating.
+
 High ECD can cause:
-• Formation breakdown
-• Lost circulation
-• Stuck pipe
+*   Formation breakdown
+*   Lost circulation
+*   Stuck pipe
+
 MWD impact: Lost circulation → telemetry loss, tool overheating, poor surveys.
 
-2.8 Downhole Pressure Regimes
+---
+
+### 2.8 Downhole Pressure Regimes
 Three main regimes:
-• Overbalanced (most common)
-• Underbalanced
-• Managed pressure drilling (MPD)
+*   Overbalanced (most common)
+*   Underbalanced
+*   Managed pressure drilling (MPD)
+
 MWD impact: Pressure affects:
-• Pulse transmission
-• Tool seals
-• Sensor calibration
+*   Pulse transmission
+*   Tool seals
+*   Sensor calibration
 
-2.9 Temperature Effects
+---
+
+### 2.9 Temperature Effects
 Temperature is one of the biggest threats to MWD tools.
+
 High temperature causes:
-• Sensor drift
-• Electronics degradation
-• Battery failure
-• Telemetry instability
-MWD techs must monitor temperature trends and anticipate failures.
+*   Sensor drift
+*   Electronics degradation
+*   Battery failure
+*   Telemetry instability
 
-2.10 Vibration & Shock
+**MWD techs must monitor temperature trends and anticipate failures.**
+
+---
+
+### 2.10 Vibration & Shock
 Three main types:
-• Axial vibration (bit bounce)
-• Lateral vibration (whirl)
-• Torsional vibration (stick slip)
+*   **Axial vibration** (bit bounce)
+*   **Lateral vibration** (whirl)
+*   **Torsional vibration** (stick slip)
+
 MWD impact:
-• Survey noise
-• Toolface instability
-• Telemetry dropouts
-• Premature tool failure
-Understanding vibration patterns helps techs diagnose issues before they become catastrophic.
+*   Survey noise
+*   Toolface instability
+*   Telemetry dropouts
+*   Premature tool failure
 
-2.11 Drilling Dysfunction & MWD Symptoms
+**Understanding vibration patterns helps techs diagnose issues before they become catastrophic.**
+
+---
+
+### 2.11 Drilling Dysfunction & MWD Symptoms
 Common dysfunctions and their MWD signatures:
-• Stick slip: Erratic toolface, pulse dropout
-• Bit bounce: Shock spikes, survey noise
-• Whirl: High lateral vibration, unstable gamma
-• Motor stalls: Lost pulses, toolface resets
-• Poor hole cleaning: Gamma lag, high temperature
+*   **Stick slip:** Erratic toolface, pulse dropout
+*   **Bit bounce:** Shock spikes, survey noise
+*   **Whirl:** High lateral vibration, unstable gamma
+*   **Motor stalls:** Lost pulses, toolface resets
+*   **Poor hole cleaning:** Gamma lag, high temperature
 
-2.12 Why Drilling Mechanics Matter to MWD Techs
+---
+
+### 2.12 Why Drilling Mechanics Matter to MWD Techs
 A great MWD tech doesn’t just watch numbers — they interpret them.
+
 Understanding drilling mechanics allows you to:
-• Predict failures
-• Explain data anomalies
-• Communicate effectively with the driller
-• Protect the tool
-• Improve data quality
-• Build trust with the rig team
-This section builds the foundation for becoming a diagnostic level MWD technician.`,
+*   Predict failures
+*   Explain data anomalies
+*   Communicate effectively with the driller
+*   Protect the tool
+*   Improve data quality
+*   Build trust with the rig team
+
+**This section builds the foundation for becoming a diagnostic level MWD technician.**`,
     quizQuestions: [
       {
         id: 's2q1',
@@ -848,169 +904,215 @@ This section builds the foundation for becoming a diagnostic level MWD technicia
     title: 'MWD Tool Physics & Internal Architecture',
     content: `This section explains the internal components, sensors, electronics, and physics that make MWD tools function. A great MWD tech doesn’t just monitor data — they understand why the tool behaves the way it does.
 
-3.1 Overview: What an MWD Tool Actually Is
+### 3.1 Overview: What an MWD Tool Actually Is
 An MWD tool is essentially a ruggedized, sensor packed computer designed to survive:
-• Extreme heat
-• Violent vibration
-• High pressure
-• Chemical exposure
-• Continuous rotation and bending
+*   Extreme heat
+*   Violent vibration
+*   High pressure
+*   Chemical exposure
+*   Continuous rotation and bending
 
 Inside the tool are:
-• Sensors (accelerometers, magnetometers, gamma detectors)
-• Electronics boards
-• Power systems (battery or turbine)
-• Telemetry system (mud pulse, EM, or wired pipe)
-• Memory modules
-• Communication buses
-Understanding these components helps techs diagnose failures and interpret data quality.
+*   Sensors (accelerometers, magnetometers, gamma detectors)
+*   Electronics boards
+*   Power systems (battery or turbine)
+*   Telemetry system (mud pulse, EM, or wired pipe)
+*   Memory modules
+*   Communication buses
 
-3.2 The Tool Body & Mechanical Structure
+> **Key Idea:** Understanding these components helps techs diagnose failures and interpret data quality.
+
+---
+
+### 3.2 The Tool Body & Mechanical Structure
 MWD tools are built inside non magnetic drill collars (NMDCs) to prevent magnetic interference.
+
 Key mechanical features:
-• Pressure barrels protect electronics from hydrostatic pressure
-• Shock absorbers reduce vibration impact
-• Centralizers keep the tool centered in the collar
-• Threaded connections allow modular assembly
-The mechanical structure is designed to protect sensitive electronics from the brutal downhole environment.
+*   **Pressure barrels** protect electronics from hydrostatic pressure
+*   **Shock absorbers** reduce vibration impact
+*   **Centralizers** keep the tool centered in the collar
+*   **Threaded connections** allow modular assembly
 
-3.3 Power Systems
+**The mechanical structure is designed to protect sensitive electronics from the brutal downhole environment.**
+
+---
+
+### 3.3 Power Systems
 MWD tools use one of three power sources:
-1. Lithium Battery Packs
-• High temperature rated
-• Long life
-• No moving parts
-• Common in motor runs and low flow environments
-2. Turbine Generators
-• Powered by mud flow
-• Provide continuous power
-• Ideal for high flow rotary drilling
-3. Hybrid Systems
-• Turbine + battery backup
-• Ensures power stability during flow interruptions
+
+1. **Lithium Battery Packs**
+*   High temperature rated
+*   Long life
+*   No moving parts
+*   Common in motor runs and low flow environments
+
+2. **Turbine Generators**
+*   Powered by mud flow
+*   Provide continuous power
+*   Ideal for high flow rotary drilling
+
+3. **Hybrid Systems**
+*   Turbine + battery backup
+*   Ensures power stability during flow interruptions
+
 Power issues often show up as:
-• Telemetry dropouts
-• Tool resets
-• Temperature spikes
-• Sensor drift
+*   Telemetry dropouts
+*   Tool resets
+*   Temperature spikes
+*   Sensor drift
 
-3.4 Internal Electronics & Boards
+---
+
+### 3.4 Internal Electronics & Boards
 Inside the tool are multiple electronics boards:
-• Sensor board (accelerometers, magnetometers)
-• Telemetry board (pulse driver, EM transmitter, wired interface)
-• Power regulation board
-• Memory board
-• CPU / processor board
+*   **Sensor board** (accelerometers, magnetometers)
+*   **Telemetry board** (pulse driver, EM transmitter, wired interface)
+*   **Power regulation board**
+*   **Memory board**
+*   **CPU / processor board**
+
 These boards communicate through internal buses. Failures often present as:
-• No pulses
-• Corrupted surveys
-• Toolface instability
-• Temperature anomalies
+*   No pulses
+*   Corrupted surveys
+*   Toolface instability
+*   Temperature anomalies
 
-3.5 Accelerometers
+---
+
+### 3.5 Accelerometers
 Accelerometers measure gravity vectors.
+
 They determine:
-• Inclination
-• Toolface (gravity toolface)
-• Shock and vibration levels
+*   Inclination
+*   Toolface (gravity toolface)
+*   Shock and vibration levels
+
 Accelerometers are sensitive to:
-• Temperature
-• Axial shock
-• Lateral vibration
-• Sensor drift
+*   Temperature
+*   Axial shock
+*   Lateral vibration
+*   Sensor drift
 
-3.6 Magnetometers
+---
+
+### 3.6 Magnetometers
 Magnetometers measure Earth’s magnetic field.
+
 They determine:
-• Azimuth
-• Magnetic toolface
-• Magnetic interference levels
+*   Azimuth
+*   Magnetic toolface
+*   Magnetic interference levels
+
 Magnetometers are affected by:
-• BHA components
-• Casing
-• Formation magnetism
-• Tool rotation
-• Temperature
-Understanding magnetometer behavior is essential for survey QC.
+*   BHA components
+*   Casing
+*   Formation magnetism
+*   Tool rotation
+*   Temperature
 
-3.7 Gamma Ray Detector
+**Understanding magnetometer behavior is essential for survey QC.**
+
+---
+
+### 3.7 Gamma Ray Detector
 Most MWD tools include a natural gamma ray detector.
+
 It measures:
-• Formation lithology
-• Shale content
-• Bed boundaries
+*   Formation lithology
+*   Shale content
+*   Bed boundaries
+
 Gamma detectors are typically:
-• Scintillation crystals
-• Photomultiplier tubes
-• Solid state detectors (newer tools)
+*   Scintillation crystals
+*   Photomultiplier tubes
+*   Solid state detectors (newer tools)
+
 Gamma issues often show up as:
-• Lag
-• Noise
-• Dropouts
-• Temperature related drift
+*   Lag
+*   Noise
+*   Dropouts
+*   Temperature related drift
 
-3.8 Telemetry Systems
+---
+
+### 3.8 Telemetry Systems
 MWD tools use one of three telemetry methods:
-Mud Pulse Telemetry
-• Positive pulse
-• Negative pulse
-• Continuous wave
-• Most common
-• Uses pressure pulses in drilling fluid
-Electromagnetic (EM) Telemetry
-• Sends EM waves through formation
-• Fast, but limited by conductivity
-Wired Pipe Telemetry
-• High speed digital communication
-• Rare but extremely powerful
+
+**Mud Pulse Telemetry**
+*   Positive pulse
+*   Negative pulse
+*   Continuous wave
+*   Most common
+*   Uses pressure pulses in drilling fluid
+
+**Electromagnetic (EM) Telemetry**
+*   Sends EM waves through formation
+*   Fast, but limited by conductivity
+
+**Wired Pipe Telemetry**
+*   High speed digital communication
+*   Rare but extremely powerful
+
 Telemetry failures often indicate:
-• Flow issues
-• Pulser failure
-• Motor stalls
-• Electrical faults
-• Formation conductivity (EM)
+*   Flow issues
+*   Pulser failure
+*   Motor stalls
+*   Electrical faults
+*   Formation conductivity (EM)
 
-3.9 Memory Systems
+---
+
+### 3.9 Memory Systems
 MWD tools store high resolution data in memory:
-• High resolution gamma
-• High resolution surveys
-• Shock/vibration logs
-• Temperature logs
+*   High resolution gamma
+*   High resolution surveys
+*   Shock/vibration logs
+*   Temperature logs
+
 Memory data is downloaded post run for:
-• Final logs
-• QC
-• Failure analysis
+*   Final logs
+*   QC
+*   Failure analysis
 
-3.10 Tool Communication & Data Flow
+---
+
+### 3.10 Tool Communication & Data Flow
 Data flows through the tool in this order:
-1. Sensors collect data
-2. Processor interprets data
-3. Telemetry board encodes data
-4. Pulser/EM/wired system transmits data
-5. Surface system decodes data
-6. Rig displays show surveys, toolface, gamma
-Any failure in this chain affects data quality.
+1.  Sensors collect data
+2.  Processor interprets data
+3.  Telemetry board encodes data
+4.  Pulser/EM/wired system transmits data
+5.  Surface system decodes data
+6.  Rig displays show surveys, toolface, gamma
 
-3.11 Common Internal Failures
+**Any failure in this chain affects data quality.**
+
+---
+
+### 3.11 Common Internal Failures
 Common MWD internal failures include:
-• Sensor drift
-• Pulser motor failure
-• Battery depletion
-• Turbine bearing failure
-• Board overheating
-• Memory corruption
-• Magnetometer saturation
-Recognizing symptoms early prevents catastrophic failure.
+*   Sensor drift
+*   Pulser motor failure
+*   Battery depletion
+*   Turbine bearing failure
+*   Board overheating
+*   Memory corruption
+*   Magnetometer saturation
 
-3.12 Why This Section Matters
+**Recognizing symptoms early prevents catastrophic failure.**
+
+---
+
+### 3.12 Why This Section Matters
 Understanding tool physics allows MWD techs to:
-• Diagnose failures
-• Interpret survey anomalies
-• Communicate effectively with engineers
-• Protect expensive downhole equipment
-• Improve data quality
-• Build credibility on the rig
-This is the section that separates “button pushers” from true MWD professionals.`,
+*   Diagnose failures
+*   Interpret survey anomalies
+*   Communicate effectively with engineers
+*   Protect expensive downhole equipment
+*   Improve data quality
+*   Build credibility on the rig
+
+**This is the section that separates “button pushers” from true MWD professionals.**`,
     quizQuestions: [
       {
         id: 's3q1',
@@ -1781,128 +1883,160 @@ A strong understanding of survey fundamentals is one of the most important skill
     content: `Magnetic interference is one of the most common causes of survey inaccuracy. Understanding how it works — and how to correct it — is essential for producing reliable directional data.
 This section gives trainees the tools to identify interference, correct for it, and maintain survey integrity in real world drilling environments.
 
-5.1 What Is Magnetic Interference?
+> **Key Idea:** A great MWD hand understands sensor physics, recognizes interference, and QC’s every survey to protect the wellbore path.
+
+---
+
+### 5.1 What Is Magnetic Interference?
 Magnetic interference occurs when external magnetic fields distort the Earth’s natural magnetic field, causing incorrect magnetometer readings.
 Sources include:
-• Drill collars
-• Motors
-• Stabilizers
-• Casing
-• Formation magnetism
-• Nearby wells
-• Surface magnetic anomalies
+* **Drill collars**
+* **Motors**
+* **Stabilizers**
+* **Casing**
+* **Formation magnetism**
+* **Nearby wells**
+* **Surface magnetic anomalies**
+
 Interference primarily affects azimuth and magnetic toolface.
 
-5.2 Types of Magnetic Interference
+---
+
+### 5.2 Types of Magnetic Interference
 There are two major categories:
-1. Axial Interference
-• Magnetic field distortion along the tool’s axis
-• Often caused by long ferrous components
-• Harder to detect
-• Causes azimuth bias
-2. Cross Axial Interference
-• Distortion perpendicular to the tool’s axis
-• Often caused by stabilizers, motors, or collars
-• Easier to detect
-• Causes inconsistent azimuth and toolface
+1. **Axial Interference**
+    * Magnetic field distortion along the tool’s axis
+    * Often caused by long ferrous components
+    * Harder to detect
+    * Causes azimuth bias
+2. **Cross Axial Interference**
+    * Distortion perpendicular to the tool’s axis
+    * Often caused by stabilizers, motors, or collars
+    * Easier to detect
+    * Causes inconsistent azimuth and toolface
+
 Both types degrade survey accuracy.
 
-5.3 BHA Components That Cause Interference
+---
+
+### 5.3 BHA Components That Cause Interference
 Common offenders:
-• Mud motors (strong magnetic signatures)
-• Stabilizers
-• Drill collars
-• RSS tools
-• Measurement subs
-• Casing strings
+* **Mud motors** (strong magnetic signatures)
+* **Stabilizers**
+* **Drill collars**
+* **RSS tools**
+* **Measurement subs**
+* **Casing strings**
+
 The closer these components are to the MWD sensors, the worse the interference.
 
-5.4 Formation Related Magnetic Interference
+---
+
+### 5.4 Formation Related Magnetic Interference
 Some formations naturally distort magnetic fields:
-• Basalt
-• Iron rich formations
-• Volcanic intrusions
-• Magnetite bearing rocks
+* **Basalt**
+* **Iron rich formations**
+* **Volcanic intrusions**
+* **Magnetite bearing rocks**
+
 These can cause:
-• Azimuth drift
-• Magnetic magnitude anomalies
-• Dip angle inconsistencies
+* **Azimuth drift**
+* **Magnetic magnitude anomalies**
+* **Dip angle inconsistencies**
+
 Formation interference is often subtle and requires QC to detect.
 
-5.5 Magnetic Magnitude & Dip Angle Checks
+---
+
+### 5.5 Magnetic Magnitude & Dip Angle Checks
 Two key QC checks:
-Magnetic Magnitude
-• Compares measured magnetic field strength to expected Earth values
-• High or low magnitude indicates interference
-Dip Angle
-• Compares measured dip to expected dip for the region
-• Deviations indicate interference or sensor bias
+* **Magnetic Magnitude:** Compares measured magnetic field strength to expected Earth values. High or low magnitude indicates interference.
+* **Dip Angle:** Compares measured dip to expected dip for the region. Deviations indicate interference or sensor bias.
+
 These checks are essential for survey QC.
 
-5.6 Magnetic Toolface vs Gravity Toolface
+---
+
+### 5.6 Magnetic Toolface vs Gravity Toolface
 Magnetic interference affects:
-• Magnetic toolface
-• Azimuth
+* **Magnetic toolface**
+* **Azimuth**
+
 Gravity toolface is unaffected by magnetic interference, which is why:
-• Sliding uses gravity toolface
-• Rotary uses magnetic toolface
+* **Sliding** uses gravity toolface
+* **Rotary** uses magnetic toolface
+
 Understanding the difference is critical for diagnosing interference.
 
-5.7 In Field Referencing (IFR)
-IFR corrects magnetic field values using:
-• Local magnetic models
-• Reference stations
-• Correction algorithms
-IFR improves azimuth accuracy in areas with:
-• Magnetic anomalies
-• Formation interference
-• Regional magnetic variation
-IFR is essential for high accuracy wells.
+---
 
-5.8 Multi Station Analysis (MSA)
+### 5.7 In Field Referencing (IFR)
+IFR corrects magnetic field values using:
+* **Local magnetic models**
+* **Reference stations**
+* **Correction algorithms**
+
+IFR improves azimuth accuracy in areas with magnetic anomalies, formation interference, or regional magnetic variation. IFR is essential for high accuracy wells.
+
+---
+
+### 5.8 Multi Station Analysis (MSA)
 MSA uses multiple surveys to detect:
-• Sensor bias
-• Magnetic interference
-• Tool misalignment
-• Accelerometer drift
+* **Sensor bias**
+* **Magnetic interference**
+* **Tool misalignment**
+* **Accelerometer drift**
+
 MSA is a powerful QC tool for identifying subtle interference patterns.
 
-5.9 BHA Design for Magnetic Accuracy
+---
+
+### 5.9 BHA Design for Magnetic Accuracy
 To reduce interference:
-• Place MWD sensors in non mag collars
-• Maintain proper spacing from motors and stabilizers
-• Use long NMDCs for high accuracy wells
-• Avoid placing magnetic components near sensors
+* **Place MWD sensors** in non mag collars
+* **Maintain proper spacing** from motors and stabilizers
+* **Use long NMDCs** for high accuracy wells
+* **Avoid placing magnetic components** near sensors
+
 Good BHA design prevents many survey issues.
 
-5.10 Survey Corrections
+---
+
+### 5.10 Survey Corrections
 Corrections include:
-• IFR corrections
-• MSA corrections
-• Cross axial interference corrections
-• Axial interference modeling
-• Magnetic declination adjustments
+* **IFR corrections**
+* **MSA corrections**
+* **Cross axial interference corrections**
+* **Axial interference modeling**
+* **Magnetic declination adjustments**
+
 These corrections improve survey accuracy and reduce risk.
 
-5.11 When Surveys Cannot Be Corrected
+---
+
+### 5.11 When Surveys Cannot Be Corrected
 Some interference is too severe to fix.
 Examples:
-• Sensors too close to a motor
-• Severe formation magnetism
-• Damaged magnetometers
-• Saturated sensors
-In these cases:
-• Surveys may be flagged as invalid
-• Additional non mag spacing may be required
-• A gyro run may be needed
+* **Sensors too close** to a motor
+* **Severe formation magnetism**
+* **Damaged magnetometers**
+* **Saturated sensors**
 
-5.12 Why Magnetic Interference Matters
+In these cases:
+* Surveys may be flagged as invalid
+* Additional non mag spacing may be required
+* A gyro run may be needed
+
+---
+
+### 5.12 Why Magnetic Interference Matters
 Poor magnetic data can lead to:
-• Incorrect azimuth
-• Misplaced wells
-• Anti collision violations
-• Lost production
-• Safety risks
+* **Incorrect azimuth**
+* **Misplaced wells**
+* **Anti collision violations**
+* **Lost production**
+* **Safety risks**
+
 A great MWD tech knows how to detect interference early and take corrective action.`,
     quizQuestions: [
       {
@@ -2228,120 +2362,139 @@ A great MWD tech knows how to detect interference early and take corrective acti
     content: `Gamma ray is the most common formation evaluation measurement included in MWD tools. It’s simple, reliable, and incredibly useful for identifying lithology, correlating to offset wells, and supporting geosteering decisions.
 This section teaches trainees how gamma ray works, what it measures, how to interpret it, and how to recognize when the data is wrong.
 
-6.1 What Is Gamma Ray Logging?
+> **Key Idea:** Gamma ray is the "eyes" of the MWD tool, allowing us to see the formation even when we can't see the bit.
+
+---
+
+### 6.1 What Is Gamma Ray Logging?
 Gamma ray logging measures natural radioactivity in formations. Most radioactive elements occur in shales, so gamma ray is primarily used to:
-• Identify shale vs. sand
-• Correlate formations
-• Detect bed boundaries
-• Support geosteering decisions
+* **Identify shale vs. sand**
+* **Correlate formations**
+* **Detect bed boundaries**
+* **Support geosteering decisions**
+
 Gamma ray is included in nearly all MWD tools because it provides valuable formation information with minimal power and bandwidth.
 
-6.2 How Gamma Ray Detectors Work
+---
+
+### 6.2 How Gamma Ray Detectors Work
 MWD gamma detectors typically use:
-Scintillation Crystals
-• Sodium iodide (NaI) or similar
-• Emit light when struck by gamma photons
-Photomultiplier Tubes (PMTs)
-• Convert light flashes into electrical pulses
-Solid State Detectors (newer tools)
-• More stable at high temperature
-• Lower drift
-• Higher resolution
+* **Scintillation Crystals:** Sodium iodide (NaI) or similar. Emit light when struck by gamma photons.
+* **Photomultiplier Tubes (PMTs):** Convert light flashes into electrical pulses.
+* **Solid State Detectors:** Newer tools. More stable at high temperature, lower drift, and higher resolution.
+
 The detector counts gamma photons and converts them into API units.
 
-6.3 Gamma Ray API Units
+---
+
+### 6.3 Gamma Ray API Units
 Gamma ray is measured in API units, a standardized scale.
 Typical values:
-• 0–50 API → clean sands, carbonates
-• 50–150 API → mixed lithology
-• 150+ API → shales
+* **0–50 API:** Clean sands, carbonates
+* **50–150 API:** Mixed lithology
+* **150+ API:** Shales
+
 Operators often set custom cutoffs depending on the basin.
 
-6.4 What Gamma Ray Tells You
+---
+
+### 6.4 What Gamma Ray Tells You
 Gamma ray helps identify:
-• Shale content
-• Formation tops
-• Bed boundaries
-• Correlation markers
-• Reservoir quality
-• Structural changes
+* **Shale content**
+* **Formation tops**
+* **Bed boundaries**
+* **Correlation markers**
+* **Reservoir quality**
+* **Structural changes**
+
 It is one of the most important logs for geosteering.
 
-6.5 Gamma Ray Lag
+---
+
+### 6.5 Gamma Ray Lag
 Gamma ray lag occurs when the gamma detector is behind the bit, meaning:
-• The gamma tool is several feet above the bit
-• Formation changes appear delayed
-• High ROP increases lag
-• Poor hole cleaning increases lag
+* **The gamma tool** is several feet above the bit
+* **Formation changes** appear delayed
+* **High ROP** increases lag
+* **Poor hole cleaning** increases lag
+
 MWD techs must understand lag to avoid misinterpreting formation changes.
 
-6.6 Gamma Ray Noise & Artifacts
+---
+
+### 6.6 Gamma Ray Noise & Artifacts
 Common causes of noisy gamma:
-• Lateral vibration
-• Poor hole cleaning
-• High ROP
-• Temperature drift
-• Electronic noise
-• Tool rotation (in some designs)
+* **Lateral vibration**
+* **Poor hole cleaning**
+* **High ROP**
+* **Temperature drift**
+* **Electronic noise**
+* **Tool rotation** (in some designs)
+
 Recognizing noise prevents incorrect formation interpretation.
 
-6.7 Gamma Ray QC
+---
+
+### 6.7 Gamma Ray QC
 QC checks include:
-• Consistency with offset wells
-• Smoothness of the curve
-• Correlation with lithology
-• Temperature stability
-• Comparison to memory data post run
+* **Consistency** with offset wells
+* **Smoothness** of the curve
+* **Correlation** with lithology
+* **Temperature stability**
+* **Comparison** to memory data post run
+
 Good QC ensures reliable formation evaluation.
 
-6.8 Gamma Ray in Geosteering
+---
+
+### 6.8 Gamma Ray in Geosteering
 Gamma ray is used to:
-• Identify shale boundaries
-• Stay within target zones
-• Detect faults or structural changes
-• Correlate to offset logs
-• Support directional decisions
+* **Identify shale boundaries**
+* **Stay within target zones**
+* **Detect faults** or structural changes
+* **Correlate** to offset logs
+* **Support directional decisions**
+
 Even though MWD gamma is lower resolution than wireline, it is essential for real time steering.
 
-6.9 Gamma Ray vs. Resistivity
+---
+
+### 6.9 Gamma Ray vs. Resistivity
 Gamma ray measures natural radioactivity. Resistivity measures formation fluid content.
 Key differences:
-Gamma Ray | Resistivity
---- | ---
-Lithology indicator | Fluid indicator
-Shale vs sand | Hydrocarbon vs water
-Always included in MWD | Optional LWD sensor
-Low bandwidth | Higher bandwidth
+* **Gamma Ray:** Lithology indicator (Shale vs sand). Always included in MWD.
+* **Resistivity:** Fluid indicator (Hydrocarbon vs water). Optional LWD sensor.
+
 Understanding both helps build a complete formation picture.
 
-6.10 Gamma Ray Memory vs Real Time
-Real time gamma:
-• Lower resolution
-• Limited bandwidth
-• Slightly delayed
-Memory gamma:
-• High resolution
-• Used for final logs
-• Better for correlation
+---
+
+### 6.10 Gamma Ray Memory vs Real Time
+* **Real time gamma:** Lower resolution, limited bandwidth, slightly delayed.
+* **Memory gamma:** High resolution, used for final logs, better for correlation.
+
 MWD techs must know the difference.
 
-6.11 Gamma Ray Calibration
-Calibration ensures:
-• Correct API scaling
-• Stable detector response
-• Accurate correlation to offset wells
-Calibration issues cause:
-• Drift
-• Incorrect API values
-• Noisy logs
+---
 
-6.12 Why Gamma Ray Matters
+### 6.11 Gamma Ray Calibration
+Calibration ensures:
+* **Correct API scaling**
+* **Stable detector response**
+* **Accurate correlation** to offset wells
+
+Calibration issues cause drift, incorrect API values, and noisy logs.
+
+---
+
+### 6.12 Why Gamma Ray Matters
 Gamma ray is essential for:
-• Formation identification
-• Geosteering
-• Correlation
-• Reservoir navigation
-• Well placement accuracy
+* **Formation identification**
+* **Geosteering**
+* **Correlation**
+* **Reservoir navigation**
+* **Well placement accuracy**
+
 A strong understanding of gamma ray interpretation is a core MWD skill.`,
     quizQuestions: [
       {
@@ -2666,79 +2819,64 @@ A strong understanding of gamma ray interpretation is a core MWD skill.`,
     title: 'Surface Systems, Decoding, & Real Time Operations',
     content: `This section teaches trainees how the surface MWD system works — how pulses are decoded, how data flows from the tool to the rig floor, and how the MWD operator monitors, interprets, and validates real time data. This is the operational backbone of the job.
 
-7.1 Overview of Surface MWD Systems
+> **Key Idea:** The surface system is the bridge between downhole physics and the driller's decisions.
+
+---
+
+### 7.1 Overview of Surface MWD Systems
 The surface system is responsible for:
-• Detecting mud pulse or EM signals
-• Decoding telemetry
-• Displaying real time surveys, toolface, gamma, and diagnostics
-• Logging data
-• Communicating with directional drillers and company men
+* **Detecting** mud pulse or EM signals
+* **Decoding** telemetry
+* **Displaying** real time surveys, toolface, gamma, and diagnostics
+* **Logging** data
+* **Communicating** with directional drillers and company men
+
 A strong understanding of the surface system is essential for reliable operations.
 
-7.2 Mud Pulse Detection Equipment
+---
+
+### 7.2 Mud Pulse Detection Equipment
 For mud pulse telemetry, the surface system includes:
-Standpipe Pressure Transducer (SPT)
-• Measures pressure fluctuations in the standpipe
-• Primary sensor for pulse detection
-Flowline Pressure Transducer
-• Secondary sensor
-• Helps confirm pulse quality
-Surface Filters & Dampeners
-• Remove pump noise and pressure spikes
-• Improve signal to noise ratio (SNR)
-Signal Cables
-• Connect transducers to the MWD surface computer
-• Must be shielded to prevent electrical interference
+* **Standpipe Pressure Transducer (SPT):** Measures pressure fluctuations in the standpipe. Primary sensor for pulse detection.
+* **Flowline Pressure Transducer:** Secondary sensor. Helps confirm pulse quality.
+* **Surface Filters & Dampeners:** Remove pump noise and pressure spikes. Improve signal to noise ratio (SNR).
+* **Signal Cables:** Connect transducers to the MWD surface computer. Must be shielded to prevent electrical interference.
 
-7.3 Decoding & Signal Processing
+---
+
+### 7.3 Decoding & Signal Processing
 The MWD surface computer processes the raw pressure signal to extract data:
-Filtering
-• Digital filters remove pump noise and harmonics
-• High pass and low pass filters isolate the pulse frequency
-Thresholding
-• Identifies pulses based on amplitude and duration
-• Must be adjusted as mud properties or pump rates change
-Decoding
-• Converts pulse sequences into binary data
-• Translates binary into engineering units (e.g., 45.2° inclination)
-Error Checking
-• Parity bits and checksums verify data integrity
-• Invalid data is flagged or discarded
+* **Filtering:** Digital filters remove pump noise and harmonics. High pass and low pass filters isolate the pulse frequency.
+* **Thresholding:** Identifies pulses based on amplitude and duration. Must be adjusted as mud properties or pump rates change.
+* **Decoding:** Converts pulse sequences into binary data. Translates binary into engineering units (e.g., 45.2° inclination).
+* **Error Checking:** Parity bits and checksums verify data integrity. Invalid data is flagged or discarded.
 
-7.4 Real Time Data Monitoring
+---
+
+### 7.4 Real Time Data Monitoring
 The MWD operator monitors several key data streams:
-Surveys
-• Inclination, Azimuth, and Toolface
-• Used to track the wellbore path
-Gamma Ray
-• Real time formation evaluation
-• Used for correlation and geosteering
-Tool Diagnostics
-• Battery voltage, internal temperature, and vibration levels
-• Used to monitor tool health and prevent failures
-Pump Pressure & Flow Rate
-• Essential for confirming the tool is pulsing correctly
-• Changes in pressure can indicate tool or pump issues
+* **Surveys:** Inclination, Azimuth, and Toolface. Used to track the wellbore path.
+* **Gamma Ray:** Real time formation evaluation. Used for correlation and geosteering.
+* **Tool Diagnostics:** Battery voltage, internal temperature, and vibration levels. Used to monitor tool health and prevent failures.
+* **Pump Pressure & Flow Rate:** Essential for confirming the tool is pulsing correctly. Changes in pressure can indicate tool or pump issues.
 
-7.5 Data Flow & Rig Integration
+---
+
+### 7.5 Data Flow & Rig Integration
 MWD data is shared with other rig systems:
-Rig Floor Display
-• Provides the driller and directional driller with real time surveys and toolface
-• Essential for steering the well
-WITS & WITSML
-• Standard protocols for sharing data between different service companies
-• Allows MWD data to be integrated into the rig's main data log
-Remote Monitoring
-• Real time data is often transmitted to town for expert analysis
-• Supports geosteering and operational decision making
+* **Rig Floor Display:** Provides the driller and directional driller with real time surveys and toolface. Essential for steering the well.
+* **WITS & WITSML:** Standard protocols for sharing data between different service companies. Allows MWD data to be integrated into the rig's main data log.
+* **Remote Monitoring:** Real time data is often transmitted to town for expert analysis. Supports geosteering and operational decision making.
 
-7.6 Operational Best Practices
+---
+
+### 7.6 Operational Best Practices
 To ensure reliable surface operations:
-• Regularly inspect and calibrate pressure transducers
-• Monitor signal quality and adjust filters as needed
-• Maintain clear communication with the driller regarding pump changes
-• Verify that real time data matches memory data after the run
-• Document all decoding issues and troubleshooting steps`,
+* **Regularly inspect** and calibrate pressure transducers
+* **Monitor signal quality** and adjust filters as needed
+* **Maintain clear communication** with the driller regarding pump changes
+* **Verify** that real time data matches memory data after the run
+* **Document** all decoding issues and troubleshooting steps`,
     quizQuestions: [
       {
         id: 's7q1',
@@ -3062,133 +3200,169 @@ To ensure reliable surface operations:
     title: 'Rig Operations, Safety, & MWD Workflow',
     content: `This section teaches the practical, operational side of being an MWD hand on location. It covers rig procedures, safety expectations, job workflow, communication, and the daily responsibilities that keep the operation running smoothly. This is the “real world” section — the part that prepares a trainee to actually work on a rig.
 
-8.1 Rig Safety Fundamentals
+> **Key Idea:** On a rig, your reputation is built on safety, accuracy, and clear communication.
+
+---
+
+### 8.1 Rig Safety Fundamentals
 MWD personnel must follow all rig safety rules, including:
-• PPE requirements
-• Hazard awareness
-• Lockout/tagout (LOTO)
-• Confined space rules
-• Fall protection
-• Hot work restrictions
+* **PPE requirements**
+* **Hazard awareness**
+* **Lockout/tagout (LOTO)**
+* **Confined space rules**
+* **Fall protection**
+* **Hot work restrictions**
+
 MWD hands must also understand:
-• Red zones
-• Pinch points
-• High pressure lines
-• Trip hazards
-• Chemical exposure
+* **Red zones**
+* **Pinch points**
+* **High pressure lines**
+* **Trip hazards**
+* **Chemical exposure**
+
 Safety is the first priority on every rig.
 
-8.2 Rig Hierarchy & Communication
+---
+
+### 8.2 Rig Hierarchy & Communication
 Key personnel:
-• Company man (OIM / superintendent)
-• Driller
-• Directional driller
-• MWD operator
-• Mud engineer
-• Floorhands
-• Toolpusher
+* **Company man** (OIM / superintendent)
+* **Driller**
+* **Directional driller**
+* **MWD operator**
+* **Mud engineer**
+* **Floorhands**
+* **Toolpusher**
+
 MWD must communicate clearly and professionally with all of them.
 
-8.3 MWD Rig Up Procedures
+---
+
+### 8.3 MWD Rig Up Procedures
 MWD rig up includes:
-• Installing surface sensors
-• Running cables safely
-• Setting up the MWD shack
-• Grounding equipment (especially EM)
-• Connecting to rig network
-• Testing telemetry
-• Verifying data flow
+* **Installing** surface sensors
+* **Running** cables safely
+* **Setting up** the MWD shack
+* **Grounding** equipment (especially EM)
+* **Connecting** to rig network
+* **Testing** telemetry
+* **Verifying** data flow
+
 Proper rig up prevents downtime and safety hazards.
 
-8.4 Pre Run Tool Preparation
+---
+
+### 8.4 Pre Run Tool Preparation
 Before running the tool:
-• Assemble BHA components
-• Install batteries or turbine modules
-• Program the tool
-• Perform function tests
-• Verify sensors
-• Check pulser operation
-• Document serial numbers
-• Complete pre run QA/QC
+* **Assemble** BHA components
+* **Install** batteries or turbine modules
+* **Program** the tool
+* **Perform** function tests
+* **Verify** sensors
+* **Check** pulser operation
+* **Document** serial numbers
+* **Complete** pre run QA/QC
+
 This ensures the tool is ready for downhole conditions.
 
-8.5 Running the Tool in Hole
+---
+
+### 8.5 Running the Tool in Hole
 MWD responsibilities during RIH:
-• Monitor tool power
-• Watch for tool resets
-• Confirm pulses at surface
-• Verify gamma response
-• Communicate with DD and driller
-• Log depth and events
+* **Monitor** tool power
+* **Watch** for tool resets
+* **Confirm** pulses at surface
+* **Verify** gamma response
+* **Communicate** with DD and driller
+* **Log** depth and events
+
 Early detection of issues prevents costly trips.
 
-8.6 Drilling Operations & Real Time Monitoring
+---
+
+### 8.6 Drilling Operations & Real Time Monitoring
 During drilling, MWD must:
-• Monitor surveys
-• Track toolface
-• Watch gamma trends
-• QC every survey
-• Monitor SNR and pulse quality
-• Track temperature and vibration
-• Communicate changes immediately
+* **Monitor** surveys
+* **Track** toolface
+* **Watch** gamma trends
+* **QC** every survey
+* **Monitor** SNR and pulse quality
+* **Track** temperature and vibration
+* **Communicate** changes immediately
+
 This is the core of the MWD job.
 
-8.7 Connection Procedures
+---
+
+### 8.7 Connection Procedures
 During connections:
-• Monitor pumps off behavior
-• Watch for tool resets
-• Confirm pulses return after pumps on
-• Validate toolface stability
-• Log connection times
+* **Monitor** pumps off behavior
+* **Watch** for tool resets
+* **Confirm** pulses return after pumps on
+* **Validate** toolface stability
+* **Log** connection times
+
 Connections are high risk moments for telemetry issues.
 
-8.8 Trip Procedures
+---
+
+### 8.8 Trip Procedures
 During trips:
-• Monitor tool power
-• Watch for temperature changes
-• Log depth and events
-• Prepare for surveys at TD
-• Communicate with DD and company man
+* **Monitor** tool power
+* **Watch** for temperature changes
+* **Log** depth and events
+* **Prepare** for surveys at TD
+* **Communicate** with DD and company man
+
 Trips are critical for tool health and data integrity.
 
-8.9 End of Run Procedures
+---
+
+### 8.9 End of Run Procedures
 After pulling out of hole:
-• Download memory data
-• Perform post run QA/QC
-• Inspect pulser and sensors
-• Document failures
-• Prepare end of run report
-• Package tool for shipping
+* **Download** memory data
+* **Perform** post run QA/QC
+* **Inspect** pulser and sensors
+* **Document** failures
+* **Prepare** end of run report
+* **Package** tool for shipping
+
 This data is essential for engineering and reliability.
 
-8.10 MWD Daily Reporting
+---
+
+### 8.10 MWD Daily Reporting
 MWD operators must complete:
-• Daily activity reports
-• Survey reports
-• Toolface reports
-• Gamma logs
-• BHA reports
-• Failure reports
-• End of run summaries
+* **Daily activity reports**
+* **Survey reports**
+* **Toolface reports**
+* **Gamma logs**
+* **BHA reports**
+* **Failure reports**
+* **End of run summaries**
+
 Accurate reporting is a core part of the job.
 
-8.11 Rig Etiquette & Professionalism
-MWD personnel must:
-• Respect rig hierarchy
-• Communicate clearly
-• Stay alert and available
-• Keep the shack clean
-• Avoid distractions
-• Maintain professionalism at all times
-Reputation matters in the field.
+---
 
-8.12 Why This Section Matters
+### 8.11 Rig Etiquette & Professionalism
+MWD personnel must:
+* **Respect** rig hierarchy
+* **Communicate** clearly
+* **Maintain** a clean workspace
+* **Be proactive** in identifying problems
+* **Support** the rig team in achieving goals
+
+---
+
+### 8.12 Why This Section Matters
 This section prepares trainees for:
-• Real world rig operations
-• Safe and efficient workflow
-• Professional communication
-• Accurate reporting
-• Reliable tool operation
+* **Real world rig operations**
+* **Safe and efficient workflow**
+* **Professional communication**
+* **Accurate reporting**
+* **Reliable tool operation**
+
 This is the section that turns knowledge into competence.`,
     quizQuestions: [
       {
@@ -3513,53 +3687,63 @@ This is the section that turns knowledge into competence.`,
     title: 'MWD Reliability, Failure Modes, & Post Run Analysis',
     content: `This section teaches the trainee how to protect the tool, recognize early warning signs, diagnose failures, and deliver high quality post run data. Reliability is the difference between an MWD hand who “gets by” and one who becomes the driller’s and DD’s first choice.
 
-9.1 What Reliability Means in MWD
+> **Key Idea:** Reliability isn't just about the tool not breaking; it's about the data being trustworthy from start to finish.
+
+---
+
+### 9.1 What Reliability Means in MWD
 MWD reliability is measured by:
-• Tool uptime: Percentage of time the tool is functioning correctly downhole.
-• Run length: The total hours or footage a tool can operate before requiring maintenance.
-• Failure frequency: Mean Time Between Failures (MTBF).
-• Data quality: Accuracy and resolution of the surveys and logs provided.
-• Ability to complete the well without tripping: Avoiding Non-Productive Time (NPT).
+* **Tool uptime:** Percentage of time the tool is functioning correctly downhole.
+* **Run length:** The total hours or footage a tool can operate before requiring maintenance.
+* **Failure frequency:** Mean Time Between Failures (MTBF).
+* **Data quality:** Accuracy and resolution of the surveys and logs provided.
+* **Ability to complete the well without tripping:** Avoiding Non-Productive Time (NPT).
 
 High reliability reduces NPT, saves the operator money, and builds trust.
 
-9.2 Categories of MWD Failures
+---
+
+### 9.2 Categories of MWD Failures
 MWD failures fall into three major categories:
 
-Mechanical Failures
-• Pulser wear: Erosion of poppet and orifice.
-• Poppet sticking: Debris or high solids jamming moving parts.
-• Motor/solenoid failure: Mechanical breakdown of the drive mechanism.
-• Bearing wear: Failure of internal bearings in turbine tools.
-• Turbine rotor/stator damage: Erosion or impact damage.
-• Erosion of moving parts: High velocity mud flow wearing down components.
+#### Mechanical Failures
+* **Pulser wear:** Erosion of poppet and orifice.
+* **Poppet sticking:** Debris or high solids jamming moving parts.
+* **Motor/solenoid failure:** Mechanical breakdown of the drive mechanism.
+* **Bearing wear:** Failure of internal bearings in turbine tools.
+* **Turbine rotor/stator damage:** Erosion or impact damage.
+* **Erosion of moving parts:** High velocity mud flow wearing down components.
 
-Electrical Failures
-• Battery depletion: Running out of power before the end of the run.
-• Power board failure: Component burnout due to heat or spikes.
-• CPU resets: Temporary loss of function due to thermal stress.
-• Sensor failures: Accelerometer or magnetometer drift/failure.
-• Wiring harness damage: Broken connections due to vibration.
-• Memory corruption: Data loss in the tool's internal storage.
+#### Electrical Failures
+* **Battery depletion:** Running out of power before the end of the run.
+* **Power board failure:** Component burnout due to heat or spikes.
+* **CPU resets:** Temporary loss of function due to thermal stress.
+* **Sensor failures:** Accelerometer or magnetometer drift/failure.
+* **Wiring harness damage:** Broken connections due to vibration.
+* **Memory corruption:** Data loss in the tool's internal storage.
 
-Environmental Failures
-• Over-temperature: Exceeding the tool's maximum temperature rating.
-• Excessive vibration (Vibe-out): High-frequency vibration damaging electronics.
-• High G-force shock: Sudden impacts during drilling or handling.
-• Pressure seal failure: Fluid ingress leading to short circuits.
+#### Environmental Failures
+* **Over-temperature:** Exceeding the tool's maximum temperature rating.
+* **Excessive vibration (Vibe-out):** High-frequency vibration damaging electronics.
+* **High G-force shock:** Sudden impacts during drilling or handling.
+* **Pressure seal failure:** Fluid ingress leading to short circuits.
 
-9.3 Early Warning Signs
+---
+
+### 9.3 Early Warning Signs
 A proactive MWD operator monitors for:
-• Decreasing pulse amplitude: Often indicates pulser wear or battery decline.
-• Increasing SNR (Signal-to-Noise Ratio): The signal is becoming harder to decode.
-• Erratic sensor readings: Sudden, unexplained jumps in data.
-• Communication timeouts: Intermittent failures in surface-to-downhole commands.
+* **Decreasing pulse amplitude:** Often indicates pulser wear or battery decline.
+* **Increasing SNR (Signal-to-Noise Ratio):** The signal is becoming harder to decode.
+* **Erratic sensor readings:** Sudden, unexplained jumps in data.
+* **Communication timeouts:** Intermittent failures in surface-to-downhole commands.
 
-9.4 Post Run Analysis
-• Tool retrieval & cleaning: Inspecting for physical damage.
-• Memory download: Retrieving high-resolution data from internal storage.
-• Real-time vs. Memory comparison: Verifying telemetry accuracy.
-• Final Data QC: Ensuring the final survey set and logs are accurate.`,
+---
+
+### 9.4 Post Run Analysis
+* **Tool retrieval & cleaning:** Inspecting for physical damage.
+* **Memory download:** Retrieving high-resolution data from internal storage.
+* **Real-time vs. Memory comparison:** Verifying telemetry accuracy.
+* **Final Data QC:** Ensuring the final survey set and logs are accurate.`,
     quizQuestions: [
       {
         id: 's9q1',
@@ -3590,103 +3774,127 @@ A proactive MWD operator monitors for:
     content: `This section teaches the MWD operator the essential directional drilling concepts needed to support the DD, understand the well plan, and anticipate operational needs.
 The goal is not to turn the trainee into a directional driller — it’s to make them a high value MWD hand who understands the bigger picture.
 
-10.1 What Directional Drillers Do
+> **Key Idea:** A great MWD hand is the Directional Driller's best ally, providing the data needed to stay on target.
+
+---
+
+### 10.1 What Directional Drillers Do
 Directional drillers are responsible for:
-• Steering the wellbore
-• Executing the well plan
-• Managing toolface and slide/rotate decisions
-• Monitoring surveys and DLS
-• Staying within geological targets
-• Communicating with the rig crew and company man
+* **Steering** the wellbore
+* **Executing** the well plan
+* **Managing** toolface and slide/rotate decisions
+* **Monitoring** surveys and DLS
+* **Staying** within geological targets
+* **Communicating** with the rig crew and company man
+
 MWD supports this by delivering accurate, timely, high quality data.
 
-10.2 The Well Plan
+---
+
+### 10.2 The Well Plan
 A well plan includes:
-• Kickoff point (KOP)
-• Build section
-• Curve section
-• Lateral section
-• Target windows
-• Anti collision rules
-• Survey intervals
-• DLS limits
+* **Kickoff point (KOP)**
+* **Build section**
+* **Curve section**
+* **Lateral section**
+* **Target windows**
+* **Anti collision rules**
+* **Survey intervals**
+* **DLS limits**
+
 MWD must understand the plan to anticipate survey needs and QC requirements.
 
-10.3 Survey Fundamentals for Directional Work
+---
+
+### 10.3 Survey Fundamentals for Directional Work
 Directional drilling relies on:
-• Inclination
-• Azimuth
-• Toolface
-• Dogleg severity (DLS)
-• Vertical section
-• North/East displacement
+* **Inclination**
+* **Azimuth**
+* **Toolface**
+* **Dogleg severity (DLS)**
+* **Vertical section**
+* **North/East displacement**
+
 MWD provides the data; the DD uses it to steer.
 
-10.4 Toolface Control
+---
+
+### 10.4 Toolface Control
 Toolface is used during sliding to control:
-• Build
-• Drop
-• Turn left
-• Turn right
+* **Build**
+* **Drop**
+* **Turn left**
+* **Turn right**
+
 MWD must monitor toolface stability and communicate issues immediately.
 
-10.5 Slide vs Rotate Drilling
-Sliding
-• Motor bend engaged
-• Toolface controls direction
-• Lower ROP
-• Higher DLS potential
-Rotating
-• Motor bend averages out
-• Wellbore straightens
-• Higher ROP
-• Lower DLS
+---
+
+### 10.5 Slide vs Rotate Drilling
+* **Sliding:** Motor bend engaged. Toolface controls direction. Lower ROP. Higher DLS potential.
+* **Rotating:** Motor bend averages out. Wellbore straightens. Higher ROP. Lower DLS.
+
 MWD must understand how each mode affects surveys and toolface.
 
-10.6 Dogleg Severity (DLS)
+---
+
+### 10.6 Dogleg Severity (DLS)
 DLS measures how quickly the wellbore changes direction.
 High DLS can cause:
-• BHA fatigue
-• Motor stalls
-• High vibration
-• Survey errors
-• Stuck pipe risk
+* **BHA fatigue**
+* **Motor stalls**
+* **High vibration**
+* **Survey errors**
+* **Stuck pipe risk**
+
 MWD must QC surveys for DLS anomalies.
 
-10.7 Anti Collision Principles
+---
+
+### 10.7 Anti Collision Principles
 MWD must understand:
-• Separation factors
-• Proximity to offset wells
-• Survey accuracy requirements
-• Why high quality surveys matter
+* **Separation factors**
+* **Proximity** to offset wells
+* **Survey accuracy** requirements
+* **Why** high quality surveys matter
+
 Anti collision is one of the most critical safety responsibilities on the rig.
 
-10.8 Slide Sheet & Survey Timing
+---
+
+### 10.8 Slide Sheet & Survey Timing
 MWD supports the DD by:
-• Delivering surveys on time
-• Tracking slide footage
-• Monitoring toolface
-• Logging slide/rotate intervals
+* **Delivering** surveys on time
+* **Tracking** slide footage
+* **Monitoring** toolface
+* **Logging** slide/rotate intervals
+
 Good timing = good steering.
 
-10.9 Directional Drilling Challenges
+---
+
+### 10.9 Directional Drilling Challenges
 Common challenges include:
-• Toolface instability
-• High vibration
-• Motor stalls
-• Poor slide efficiency
-• Formation changes
-• High DLS
-• Survey interference
+* **Toolface instability**
+* **High vibration**
+* **Motor stalls**
+* **Poor slide efficiency**
+* **Formation changes**
+* **High DLS**
+* **Survey interference**
+
 MWD must recognize these early.
 
-10.10 Why MWD Must Understand Directional Drilling
+---
+
+### 10.10 Why MWD Must Understand Directional Drilling
 A great MWD hand:
-• Anticipates survey needs
-• Understands steering decisions
-• Communicates effectively with the DD
-• Recognizes directional problems early
-• Provides data that supports safe, accurate drilling
+* **Anticipates** survey needs
+* **Understands** steering decisions
+* **Communicates** effectively with the DD
+* **Recognizes** directional problems early
+* **Provides data** that supports safe, accurate drilling
+
 This section builds that capability.`,
     quizQuestions: [
       {
@@ -4011,126 +4219,146 @@ This section builds that capability.`,
     title: 'Drilling Dynamics, Vibration, & Downhole Dysfunction',
     content: `This section teaches the trainee how to interpret drilling dynamics data, recognize harmful vibration patterns, and understand how drilling dysfunctions impact tool reliability, survey quality, and directional performance.
 
-This is one of the most important sections for protecting the tool and supporting the DD.
+> **Key Idea:** This is one of the most important sections for protecting the tool and supporting the DD.
 
-11.1 What Are Drilling Dynamics?
+---
+
+### 11.1 What Are Drilling Dynamics?
 Drilling dynamics refers to the mechanical forces acting on the drillstring and BHA, including:
-• Axial forces
-• Lateral forces
-• Torsional forces
-• Shock events
-• Stick slip
-• Whirl
+* Axial forces
+* Lateral forces
+* Torsional forces
+* Shock events
+* Stick slip
+* Whirl
 
 MWD tools often include vibration sensors to monitor these forces.
 
-11.2 Types of Vibration
-Axial Vibration (Bit Bounce)
-• Up and down motion
-• Caused by WOB fluctuations, hard stringers, or poor bit engagement
-• Can damage pulser components and bearings
+---
 
-Lateral Vibration (Whirl)
-• Side to side motion
-• Caused by BHA instability, high RPM, or poor hole cleaning
-• Causes toolface instability and sensor drift
+### 11.2 Types of Vibration
+**Axial Vibration (Bit Bounce)**
+* Up and down motion
+* Caused by WOB fluctuations, hard stringers, or poor bit engagement
+* Can damage pulser components and bearings
 
-Torsional Vibration (Stick Slip)
-• Bit alternates between sticking and spinning rapidly
-• Caused by high WOB, low RPM, or formation changes
-• Extremely damaging to electronics and motors
+**Lateral Vibration (Whirl)**
+* Side to side motion
+* Caused by BHA instability, high RPM, or poor hole cleaning
+* Causes toolface instability and sensor drift
 
-11.3 Stick Slip
+**Torsional Vibration (Stick Slip)**
+* Bit alternates between sticking and spinning rapidly
+* Caused by high WOB, low RPM, or formation changes
+* Extremely damaging to electronics and motors
+
+---
+
+### 11.3 Stick Slip
 Stick slip is one of the most destructive drilling dysfunctions.
 Symptoms include:
-• RPM oscillations
-• Toolface jumps
-• Survey noise
-• High shock levels
-• Motor stalls
+* RPM oscillations
+* Toolface jumps
+* Survey noise
+* High shock levels
+* Motor stalls
 
 MWD must report stick slip immediately.
 
-11.4 Shock Events
+---
+
+### 11.4 Shock Events
 Shock events occur when the BHA experiences sudden impacts.
 Causes include:
-• Hard stringers
-• Bit bounce
-• Sudden WOB changes
-• Motor stalls
-• Reaming in tight spots
+* Hard stringers
+* Bit bounce
+* Sudden WOB changes
+* Motor stalls
+* Reaming in tight spots
 
 Shock damages:
-• Sensors
-• Bearings
-• Pulsers
-• Electronics
+* Sensors
+* Bearings
+* Pulsers
+* Electronics
 
-11.5 BHA Stability
+---
+
+### 11.5 BHA Stability
 Stable BHAs produce:
-• Smooth toolface
-• Predictable DLS
-• Clean surveys
-• Lower vibration
+* Smooth toolface
+* Predictable DLS
+* Clean surveys
+* Lower vibration
 
 Unstable BHAs produce:
-• Erratic toolface
-• High DLS
-• Survey noise
-• Increased failure risk
+* Erratic toolface
+* High DLS
+* Survey noise
+* Increased failure risk
 
 MWD must recognize instability early.
 
-11.6 Drilling Dysfunction Indicators in MWD Data
+---
+
+### 11.6 Drilling Dysfunction Indicators in MWD Data
 MWD operators must watch for:
-• Toolface jumps
-• Sudden DLS spikes
-• Survey noise
-• High vibration readings
-• Temperature spikes
-• Pulse distortion
+* Toolface jumps
+* Sudden DLS spikes
+* Survey noise
+* High vibration readings
+* Temperature spikes
+* Pulse distortion
 
 These often indicate drilling dysfunction.
 
-11.7 How Drilling Dynamics Affect MWD Reliability
+---
+
+### 11.7 How Drilling Dynamics Affect MWD Reliability
 High vibration and shock cause:
-• Pulser wear
-• Sensor drift
-• CPU resets
-• Memory corruption
-• Structural fatigue
-• Bearing failure
+* Pulser wear
+* Sensor drift
+* CPU resets
+* Memory corruption
+* Structural fatigue
+* Bearing failure
 
 Understanding drilling dynamics is essential for tool protection.
 
-11.8 Communication During Dysfunction
+---
+
+### 11.8 Communication During Dysfunction
 MWD must communicate:
-• Vibration levels
-• Toolface instability
-• Survey anomalies
-• Stick slip indicators
-• Shock events
+* Vibration levels
+* Toolface instability
+* Survey anomalies
+* Stick slip indicators
+* Shock events
 
 Clear communication helps the DD adjust drilling parameters.
 
-11.9 Mitigating Drilling Dysfunction
+---
+
+### 11.9 Mitigating Drilling Dysfunction
 Common mitigation steps:
-• Reduce WOB
-• Increase RPM
-• Change mud properties
-• Adjust flow rate
-• Modify BHA design
-• Change bit type
+* Reduce WOB
+* Increase RPM
+* Change mud properties
+* Adjust flow rate
+* Modify BHA design
+* Change bit type
 
 MWD doesn’t make these decisions — but must recognize when they’re needed.
 
-11.10 Why This Section Matters
+---
+
+### 11.10 Why This Section Matters
 A great MWD hand:
-• Recognizes drilling dysfunction early
-• Protects the tool
-• Supports directional performance
-• Communicates clearly with the DD
-• Prevents catastrophic failures
+* Recognizes drilling dysfunction early
+* Protects the tool
+* Supports directional performance
+* Communicates clearly with the DD
+* Prevents catastrophic failures
 
 This section builds those skills.`,
     quizQuestions: [
@@ -4454,102 +4682,130 @@ This section builds those skills.`,
   {
     id: 'section-12',
     title: 'Gamma Ray, Formation Evaluation & Geological Interpretation',
-    content: `This section teaches the trainee how to interpret gamma ray data, understand formation changes, recognize geological markers, and support directional/geosteering decisions with high quality real time information.
+    content: `This section teaches the trainee how to interpret gamma ray data, understand formation changes, recognize geological markers, and support directional/geosteering decisions with high-quality real-time information.
 
-The goal is not to turn the trainee into a geologist — it’s to make them a geologically aware MWD hand who understands what the data means.
+> **Key Idea:** Gamma is the most important geological measurement in MWD. It helps identify formation boundaries, reservoir entry points, and target windows.
 
-12.1 What Gamma Ray Measures
+---
+
+### 12.1 What Gamma Ray Measures
 Gamma ray measures natural radioactivity in the formation, primarily from:
-• Potassium
-• Thorium
-• Uranium
-High gamma = shale Low gamma = sand, limestone, dolomite
+* Potassium
+* Thorium
+* Uranium
 
-12.2 Why Gamma Ray Matters
+**High gamma** = shale
+**Low gamma** = sand, limestone, dolomite
+
+---
+
+### 12.2 Why Gamma Ray Matters
 Gamma ray helps identify:
-• Formation boundaries
-• Sand/shale transitions
-• Reservoir entry points
-• Correlation markers
-• Target windows
-• Geosteering decisions
-Gamma is the most important geological measurement in MWD.
+* Formation boundaries
+* Sand/shale transitions
+* Reservoir entry points
+* Correlation markers
+* Target windows
+* Geosteering decisions
 
-12.3 Gamma Ray Response Patterns
-High Gamma
-• Shale
-• Tight rock
-• Low porosity
-• Often non reservoir
+---
 
-Low Gamma
-• Sandstone
-• Carbonates
-• Potential reservoir zones
+### 12.3 Gamma Ray Response Patterns
+**High Gamma**
+* Shale
+* Tight rock
+* Low porosity
+* Often non-reservoir
 
-Gamma Spikes
-• Thin shale streaks
-• Faults
-• Formation changes
+**Low Gamma**
+* Sandstone
+* Carbonates
+* Potential reservoir zones
 
-12.4 Gamma Ray Lag
+**Gamma Spikes**
+* Thin shale streaks
+* Faults
+* Formation changes
+
+---
+
+### 12.4 Gamma Ray Lag
 Gamma ray is measured at the tool, not at the bit. Lag depends on:
-• Tool to bit distance
-• ROP
-• Survey interval
-MWD must understand lag to help correlate real time gamma with bit position.
+* Tool-to-bit distance
+* ROP
+* Survey interval
 
-12.5 Formation Tops & Markers
+MWD must understand lag to help correlate real-time gamma with bit position.
+
+---
+
+### 12.5 Formation Tops & Markers
 Gamma helps identify:
-• KOP formation
-• Curve landing point
-• Lateral entry
-• Target boundaries
-• Reservoir tops
-• Shale/sand transitions
+* KOP formation
+* Curve landing point
+* Lateral entry
+* Target boundaries
+* Reservoir tops
+* Shale/sand transitions
+
 Accurate gamma interpretation supports geosteering.
 
-12.6 Gamma QC (Quality Control)
+---
+
+### 12.6 Gamma QC (Quality Control)
 MWD must check for:
-• Frozen gamma
-• Unrealistic spikes
-• Noise from vibration
-• Incorrect scaling
-• Sensor drift
-• Memory vs real time mismatch
+* Frozen gamma
+* Unrealistic spikes
+* Noise from vibration
+* Incorrect scaling
+* Sensor drift
+* Memory vs real-time mismatch
+
 Clean gamma is essential for geological decisions.
 
-12.7 Geological Interpretation Basics
+---
+
+### 12.7 Geological Interpretation Basics
 MWD should understand:
-• Shale vs sand signatures
-• Gradual vs abrupt transitions
-• Correlation with offset wells
-• How gamma trends affect steering decisions
+* Shale vs sand signatures
+* Gradual vs abrupt transitions
+* Correlation with offset wells
+* How gamma trends affect steering decisions
+
 This helps the DD and geologist make informed choices.
 
-12.8 Gamma in the Curve
+---
+
+### 12.8 Gamma in the Curve
 Gamma helps:
-• Identify landing point
-• Confirm formation entry
-• Detect shale boundaries
-• Support build/drop decisions
+* Identify landing point
+* Confirm formation entry
+* Detect shale boundaries
+* Support build/drop decisions
+
 Accurate gamma is critical in the curve.
 
-12.9 Gamma in the Lateral
+---
+
+### 12.9 Gamma in the Lateral
 In the lateral, gamma is used to:
-• Stay within the reservoir
-• Detect boundary drift
-• Identify faults or formation changes
-• Support geosteering adjustments
+* Stay within the reservoir
+* Detect boundary drift
+* Identify faults or formation changes
+* Support geosteering adjustments
+
 MWD must deliver gamma quickly and reliably.
 
-12.10 Why This Section Matters
+---
+
+### 12.10 Why This Section Matters
 A great MWD hand:
-• Understands gamma trends
-• Recognizes formation changes
-• Supports geosteering
-• QC’s gamma data continuously
-• Communicates geological markers clearly
+* Understands gamma trends
+* Recognizes formation changes
+* Supports geosteering
+* QC’s gamma data continuously
+* Communicates geological markers clearly
+
 This section builds those skills.`,
     quizQuestions: [
       {
@@ -4872,97 +5128,110 @@ This section builds those skills.`,
   {
     id: 'section-13',
     title: 'Field Scenarios & Case Studies',
-    content: `Purpose:
-To build real world confidence, situational awareness, and operational judgment by exposing the trainee to realistic telemetry and drilling environment challenges.
+    content: `This section builds real-world confidence, situational awareness, and operational judgment by exposing the trainee to realistic telemetry and drilling environment challenges.
 
-These scenarios reflect the most common — and most critical — issues an MWD hand must diagnose quickly.
+> **Key Idea:** These scenarios reflect the most common — and most critical — issues an MWD hand must diagnose quickly.
 
-13.1 Lost Communications During Slide
+---
+
+### 13.1 Lost Communications During Slide
 Sliding creates:
-• Lower RPM
-• Higher friction
-• Higher vibration
-• Motor stalls
-• Toolface instability
+* Lower RPM
+* Higher friction
+* Higher vibration
+* Motor stalls
+* Toolface instability
 
 These conditions often cause:
-• Weak pulses
-• Distorted pulses
-• Dropouts
-• Low SNR
+* Weak pulses
+* Distorted pulses
+* Dropouts
+* Low SNR
 
-MWD must determine whether the issue is pulser related, hydraulics related, or vibration related.
+MWD must determine whether the issue is pulser-related, hydraulics-related, or vibration-related.
 
-13.2 High Vibration in the Curve
+---
+
+### 13.2 High Vibration in the Curve
 The curve is notorious for:
-• High DLS
-• BHA instability
-• Whirl
-• Stick slip
-• Shock events
+* High DLS
+* BHA instability
+* Whirl
+* Stick slip
+* Shock events
 
 High vibration affects:
-• Pulse clarity
-• SNR
-• Toolface
-• Survey quality
+* Pulse clarity
+* SNR
+* Toolface
+* Survey quality
 
 MWD must recognize vibration signatures and communicate early.
 
-13.3 Magnetic Interference Near Casing
+---
+
+### 13.3 Magnetic Interference Near Casing
 When drilling near casing or magnetic steel:
-• Azimuth becomes erratic
-• Dip angle becomes unrealistic
-• Magnetic magnitude spikes or drops
-• Toolface jumps
+* Azimuth becomes erratic
+* Dip angle becomes unrealistic
+* Magnetic magnitude spikes or drops
+* Toolface jumps
 
 MWD must identify interference vs sensor failure.
 
-13.4 EM Signal Loss in Conductive Formations
+---
+
+### 13.4 EM Signal Loss in Conductive Formations
 EM telemetry struggles in:
-• Salt
-• Shale with high water content
-• Conductive formations
-• Deep wells
+* Salt
+* Shale with high water content
+* Conductive formations
+* Deep wells
 
 Symptoms include:
-• Weak EM signal
-• No decoding
-• Intermittent comms
-• High noise floor
+* Weak EM signal
+* No decoding
+* Intermittent comms
+* High noise floor
 
 MWD must know when EM is unreliable.
 
-13.5 Gamma Ray Dropouts
+---
+
+### 13.5 Gamma Ray Dropouts
 Gamma dropouts may be caused by:
-• Sensor failure
-• Connector issues
-• Shock events
-• High vibration
-• Electronics resets
+* Sensor failure
+* Connector issues
+* Shock events
+* High vibration
+* Electronics resets
 
 MWD must distinguish between geological changes and tool issues.
 
-13.6 Toolface Oscillation in Motor Runs
+---
+
+### 13.6 Toolface Oscillation in Motor Runs
 Toolface oscillation occurs when:
-• Lateral vibration is high
-• Motor stalls
-• Bit is bouncing
-• BHA is unstable
-• RPM is inconsistent
+* Lateral vibration is high
+* Motor stalls
+* Bit is bouncing
+* BHA is unstable
+* RPM is inconsistent
 
-MWD must identify whether the oscillation is mechanical, hydraulic, or formation related.
+MWD must identify whether the oscillation is mechanical, hydraulic, or formation-related.
 
-13.7 Why These Scenarios Matter
+---
+
+### 13.7 Why These Scenarios Matter
 A great MWD hand:
-• Recognizes patterns instantly
-• Diagnoses issues under pressure
-• Communicates clearly with the DD
-• Protects the tool
-• Prevents unnecessary trips
-• Maintains high quality data flow
+* Recognizes patterns instantly
+* Diagnoses issues under pressure
+* Communicates clearly with the DD
+* Protects the tool
+* Prevents unnecessary trips
+* Maintains high-quality data flow
 
-This section builds real world judgment.`,
+This section builds real-world judgment.`,
     quizQuestions: [
       {
         id: 's13q1',
@@ -5284,98 +5553,111 @@ This section builds real world judgment.`,
   {
     id: 'section-14',
     title: 'Pre Run & Post Run Procedures',
-    content: `Purpose:
-To ensure consistency, reliability, and professionalism in field operations by teaching the trainee how to properly prepare, test, program, QA/QC, and close out an MWD run.
+    content: `This section ensures consistency, reliability, and professionalism in field operations by teaching the trainee how to properly prepare, test, program, QA/QC, and close out an MWD run.
 
-This section is all about repeatable excellence.
+> **Key Idea:** This section is all about repeatable excellence. Proper preparation prevents most failures.
 
-14.1 Tool Preparation
+---
+
+### 14.1 Tool Preparation
 Before anything else, the MWD hand must:
-• Inspect all tool components
-• Check connectors, seals, and O rings
-• Verify battery condition
-• Confirm pulser mechanical integrity
-• Inspect sensors for damage
-• Verify correct tool configuration for the run
+* Inspect all tool components
+* Check connectors, seals, and O-rings
+* Verify battery condition
+* Confirm pulser mechanical integrity
+* Inspect sensors for damage
+* Verify correct tool configuration for the run
 
-Proper prep prevents most failures.
+---
 
-14.2 Bench Testing
+### 14.2 Bench Testing
 Bench testing ensures the tool works before it goes downhole.
 Includes:
-• Pulser function test
-• Sensor checks (gamma, incl/azimuth, vibration)
-• Pressure test (if required)
-• Communication test
-• Flow loop test (if available)
+* Pulser function test
+* Sensor checks (gamma, incl/azimuth, vibration)
+* Pressure test (if required)
+* Communication test
+* Flow loop test (if available)
 
 Bench tests catch issues early.
 
-14.3 Programming
+---
+
+### 14.3 Programming
 Programming includes:
-• Survey interval
-• Telemetry mode
-• Pulse width / spacing
-• Toolface mode
-• Gamma scaling
-• Memory logging parameters
-• Run ID and well info
+* Survey interval
+* Telemetry mode
+* Pulse width / spacing
+* Toolface mode
+* Gamma scaling
+* Memory logging parameters
+* Run ID and well info
 
-Incorrect programming = incorrect data.
+**Key Note:** Incorrect programming = incorrect data.
 
-14.4 QA/QC Before Run
+---
+
+### 14.4 QA/QC Before Run
 MWD must verify:
-• All sensors respond correctly
-• Telemetry decodes cleanly
-• Toolface is stable
-• Gamma matches expected baseline
-• Memory logging is active
-• All serial numbers match paperwork
+* All sensors respond correctly
+* Telemetry decodes cleanly
+* Toolface is stable
+* Gamma matches expected baseline
+* Memory logging is active
+* All serial numbers match paperwork
 
 QA/QC ensures the tool is ready for the well.
 
-14.5 Post Run Data Extraction
+---
+
+### 14.5 Post-Run Data Extraction
 After the run, MWD must:
-• Download memory data
-• Verify completeness
-• Check for gaps or corruption
-• Compare memory vs real time
-• Export logs for reporting
+* Download memory data
+* Verify completeness
+* Check for gaps or corruption
+* Compare memory vs real-time
+* Export logs for reporting
 
-Memory data is often the most accurate record.
+**Key Note:** Memory data is often the most accurate record.
 
-14.6 Memory Dump & Diagnostics
+---
+
+### 14.6 Memory Dump & Diagnostics
 Memory dump includes:
-• Raw sensor logs
-• Shock/vibration history
-• Temperature logs
-• Pulser performance logs
-• Error codes
-• CPU resets
-• Battery usage
+* Raw sensor logs
+* Shock/vibration history
+* Temperature logs
+* Pulser performance logs
+* Error codes
+* CPU resets
+* Battery usage
 
 This data helps diagnose failures and improve future runs.
 
-14.7 Reporting
+---
+
+### 14.7 Reporting
 MWD must produce:
-• Pre run checklist
-• Post run report
-• Survey report
-• Gamma log
-• Telemetry performance summary
-• Failure analysis (if needed)
-• Tool performance notes
+* Pre-run checklist
+* Post-run report
+* Survey report
+* Gamma log
+* Telemetry performance summary
+* Failure analysis (if needed)
+* Tool performance notes
 
 Professional reporting builds trust and credibility.
 
-14.8 Why This Section Matters
+---
+
+### 14.8 Why This Section Matters
 A great MWD hand:
-• Prepares tools meticulously
-• Bench tests thoroughly
-• Programs accurately
-• QA/QCs everything
-• Extracts clean data
-• Reports professionally
+* Prepares tools meticulously
+* Bench tests thoroughly
+* Programs accurately
+* QA/QCs everything
+* Extracts clean data
+* Reports professionally
 
 This section builds operational discipline.`,
     quizQuestions: [
@@ -5702,16 +5984,16 @@ This section builds operational discipline.`,
     content: `This is the final assessment for the MWD Pro curriculum. 
 
 This comprehensive exam covers all 14 previous sections, including:
-• Tool Physics & Mechanics
-• Telemetry & Signal Processing
-• Directional Drilling Fundamentals
-• Drilling Dynamics & Vibration
-• Gamma Ray & Formation Evaluation
-• Field Scenarios & Troubleshooting
-• Pre-Run & Post-Run Procedures
-• Professional Excellence
+* Tool Physics & Mechanics
+* Telemetry & Signal Processing
+* Directional Drilling Fundamentals
+* Drilling Dynamics & Vibration
+* Gamma Ray & Formation Evaluation
+* Field Scenarios & Troubleshooting
+* Pre-Run & Post-Run Procedures
+* Professional Excellence
 
-A passing score of 80% or higher is required to earn your digital Petro Academy MWD Pro Certification.`,
+> **Key Idea:** A passing score of 80% or higher is required to earn your digital Petro Academy MWD Pro Certification.`,
     quizQuestions: [
       {
         id: 's15q1',
