@@ -97,6 +97,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
 export default function App() {
   const { user, login, logout, saveQuizResult, results, loading } = useFirebase();
+  const [hasStarted, setHasStarted] = useState(false);
   const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
   const [view, setView] = useState<'curriculum' | 'quiz' | 'results' | 'certification' | 'profile'>('curriculum');
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -112,7 +113,6 @@ export default function App() {
       alert("Quiz content for this section is coming soon!");
       return;
     }
-    // Shuffle questions
     const shuffled = [...section.quizQuestions].sort(() => Math.random() - 0.5);
     setCurrentQuizQuestions(shuffled);
     setQuizAnswers({});
@@ -147,6 +147,51 @@ export default function App() {
     setView('results');
   };
 
+  if (!hasStarted) {
+    return (
+      <div className="min-h-screen max-w-md mx-auto bg-[#0a0a0a] flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+        {/* Atmospheric Background */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_50%_50%,#1a1a1a_0%,transparent_70%)] opacity-50" />
+          <div className="absolute top-[20%] right-[-20%] w-[80%] h-[80%] bg-[radial-gradient(circle_at_50%_50%,#10b981_0%,transparent_70%)] opacity-10 blur-[100px]" />
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 space-y-12"
+        >
+          <div className="space-y-6">
+            <div className="w-24 h-24 bg-emerald-500 rounded-[2rem] flex items-center justify-center text-zinc-900 mx-auto shadow-[0_0_50px_rgba(16,185,129,0.3)]">
+              <GraduationCap size={48} />
+            </div>
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold tracking-tighter text-white font-display">MWD PRO</h1>
+              <p className="text-zinc-500 font-medium tracking-widest uppercase text-xs">Petro Academy Training</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-zinc-400 text-lg leading-relaxed">
+              Master the art of <span className="text-white font-semibold">Measurement While Drilling</span> with our professional certification program.
+            </p>
+          </div>
+
+          <button 
+            onClick={() => setHasStarted(true)}
+            className="w-full py-5 bg-emerald-500 text-zinc-900 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-500/20 active:scale-95 transition-all hover:bg-emerald-400"
+          >
+            Get Started
+          </button>
+
+          <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-bold">
+            Version 1.0.0 • Professional Edition
+          </p>
+        </motion.div>
+      </div>
+    );
+  }
+
   return (
     <ErrorBoundary>
       <div className="min-h-screen max-w-md mx-auto bg-zinc-50 flex flex-col relative overflow-hidden">
@@ -157,7 +202,7 @@ export default function App() {
             <GraduationCap size={24} />
           </div>
           <div>
-            <h1 className="text-lg font-bold tracking-tight">MWD Pro</h1>
+            <h1 className="text-lg font-bold tracking-tight font-display">MWD Pro</h1>
             <p className="text-[10px] uppercase tracking-widest text-zinc-400 font-semibold">Petro Academy</p>
           </div>
         </div>
@@ -205,7 +250,7 @@ export default function App() {
             >
               <div className="flex items-center gap-2 text-zinc-400 mb-2">
                 <BookOpen size={16} />
-                <span className="text-xs font-bold uppercase tracking-widest">Curriculum</span>
+                <span className="text-xs font-bold uppercase tracking-widest font-display">Curriculum</span>
               </div>
 
               {/* Overall Progress Bar */}
@@ -234,7 +279,7 @@ export default function App() {
                       onClick={() => setCurrentSectionId(null)}
                       className="flex items-center gap-2 text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors bg-zinc-100 px-4 py-2 rounded-full"
                     >
-                      <ChevronLeft size={18} /> Back to Modules
+                      <ChevronLeft size={18} /> Back
                     </button>
                     <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 px-4 py-2 rounded-full">
                       <BookOpen size={16} />
@@ -243,7 +288,7 @@ export default function App() {
                   </div>
 
                   <div className="space-y-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-zinc-900 leading-tight">{currentSection.title}</h2>
+                    <h2 className="text-3xl font-bold tracking-tight text-zinc-900 leading-tight font-display">{currentSection.title}</h2>
                     
                     <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-zinc-100">
                       <div className="prose prose-zinc prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-zinc-600 prose-p:leading-relaxed prose-li:text-zinc-600 prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-hr:border-zinc-100 max-w-none">
@@ -255,7 +300,7 @@ export default function App() {
                   <div className="flex justify-center pt-4 pb-12">
                     <button 
                       onClick={() => startQuiz(currentSection)}
-                      className="group flex items-center gap-3 bg-zinc-900 text-white px-10 py-5 rounded-2xl font-bold hover:bg-emerald-600 transition-all shadow-xl shadow-zinc-200 active:scale-95"
+                      className="group flex items-center gap-3 btn-hardware px-10 py-5 shadow-xl shadow-emerald-500/20"
                     >
                       <PlayCircle size={24} />
                       Start Module Quiz
@@ -266,7 +311,7 @@ export default function App() {
               ) : (
                 <div className="space-y-6">
                   <div className="space-y-1">
-                    <h2 className="text-3xl font-bold tracking-tight">Training Modules</h2>
+                    <h2 className="text-3xl font-bold tracking-tight font-display">Training Modules</h2>
                     <p className="text-sm text-zinc-500">Complete all 15 sections to earn your MWD Certification.</p>
                   </div>
                   
@@ -275,26 +320,25 @@ export default function App() {
                       <button 
                         key={section.id}
                         onClick={() => setCurrentSectionId(section.id)}
-                        className="group relative bg-white p-6 rounded-[2rem] border border-zinc-100 shadow-sm hover:shadow-md hover:border-emerald-100 transition-all text-left overflow-hidden active:scale-[0.98]"
+                        className="group relative hardware-card p-6 border border-white/5 hover:border-emerald-500/50 transition-all text-left overflow-hidden active:scale-[0.98]"
                       >
                         <div className="flex items-center gap-5">
-                          <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center text-zinc-400 font-bold group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors shrink-0">
+                          <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-zinc-500 font-bold group-hover:bg-emerald-500 group-hover:text-zinc-900 transition-colors shrink-0 font-display">
                             {index + 1}
                           </div>
                           <div className="flex-1">
-                            <h3 className="font-bold text-zinc-900 group-hover:text-emerald-700 transition-colors">{section.title}</h3>
+                            <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors font-display">{section.title}</h3>
                             <div className="flex items-center gap-2 mt-1">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Module {index + 1}</span>
-                              <div className="w-1 h-1 rounded-full bg-zinc-200" />
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600">Available</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Module {index + 1}</span>
+                              <div className="w-1 h-1 rounded-full bg-zinc-800" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">Available</span>
                             </div>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-zinc-900 transition-all shrink-0">
                             <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
                           </div>
                         </div>
                         
-                        {/* Subtle background accent */}
                         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-emerald-500/10 transition-colors" />
                       </button>
                     ))}
@@ -313,7 +357,7 @@ export default function App() {
               className="space-y-8"
             >
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Knowledge Check</h2>
+                <h2 className="text-xl font-bold font-display">Knowledge Check</h2>
                 <span className="text-xs font-bold bg-zinc-100 px-3 py-1 rounded-full">
                   {Object.keys(quizAnswers).length} / {currentQuizQuestions.length}
                 </span>
@@ -414,7 +458,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold">
+                <h2 className="text-3xl font-bold font-display">
                   {calculateScore() / currentQuizQuestions.length >= 0.8 ? 'Excellent!' : 'Good Effort!'}
                 </h2>
                 <p className="text-zinc-500">
@@ -447,6 +491,57 @@ export default function App() {
             </motion.div>
           )}
 
+          {view === 'certification' && (
+            <motion.div 
+              key="certification"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="space-y-8 py-12"
+            >
+              <div className="bg-white rounded-[2.5rem] p-10 shadow-2xl border-8 border-emerald-500/10 text-center space-y-8 relative overflow-hidden">
+                {/* Certificate Background Elements */}
+                <div className="absolute top-0 left-0 w-full h-2 bg-emerald-500" />
+                <div className="absolute bottom-0 left-0 w-full h-2 bg-emerald-500" />
+                <div className="absolute top-10 right-10 opacity-5">
+                  <GraduationCap size={120} />
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald-600">Certificate of Completion</p>
+                  <h2 className="text-3xl font-bold font-display tracking-tight text-zinc-900">MWD PROFESSIONAL</h2>
+                </div>
+
+                <div className="space-y-1">
+                  <p className="text-zinc-400 text-xs italic">This is to certify that</p>
+                  <p className="text-2xl font-bold font-display border-b-2 border-zinc-100 pb-2 inline-block min-w-[200px]">
+                    {user?.displayName || 'Trainee'}
+                  </p>
+                </div>
+
+                <p className="text-zinc-500 text-sm leading-relaxed max-w-[240px] mx-auto">
+                  Has successfully completed the comprehensive MWD curriculum and demonstrated mastery in drilling dynamics, telemetry, and formation evaluation.
+                </p>
+
+                <div className="flex justify-between items-end pt-8">
+                  <div className="text-left space-y-1">
+                    <p className="text-[8px] font-bold uppercase tracking-widest text-zinc-400">Date Issued</p>
+                    <p className="text-xs font-bold">{new Date().toLocaleDateString()}</p>
+                  </div>
+                  <div className="w-16 h-16 bg-zinc-900 rounded-2xl flex items-center justify-center text-white rotate-12 shadow-xl">
+                    <Award size={32} />
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => setView('profile')}
+                className="w-full btn-primary"
+              >
+                Back to Profile
+              </button>
+            </motion.div>
+          )}
+
           {view === 'profile' && (
             <motion.div 
               key="profile"
@@ -457,7 +552,7 @@ export default function App() {
             >
               <div className="flex items-center gap-2 text-zinc-400 mb-2">
                 <UserIcon size={16} />
-                <span className="text-xs font-bold uppercase tracking-widest">My Profile</span>
+                <span className="text-xs font-bold uppercase tracking-widest font-display">My Profile</span>
               </div>
 
               {user ? (
@@ -470,7 +565,7 @@ export default function App() {
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <h3 className="text-xl font-bold">{user.displayName}</h3>
+                      <h3 className="text-xl font-bold font-display">{user.displayName}</h3>
                       <p className="text-sm text-zinc-500">{user.email}</p>
                     </div>
                   </div>
@@ -478,7 +573,7 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 text-zinc-400">
                       <History size={16} />
-                      <h4 className="text-xs font-bold uppercase tracking-widest">Quiz History</h4>
+                      <h4 className="text-xs font-bold uppercase tracking-widest font-display">Quiz History</h4>
                     </div>
 
                     {results.length > 0 ? (
@@ -507,7 +602,7 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-2 text-zinc-400">
                       <Award size={16} />
-                      <h4 className="text-xs font-bold uppercase tracking-widest">Certifications</h4>
+                      <h4 className="text-xs font-bold uppercase tracking-widest font-display">Certifications</h4>
                     </div>
                     {results.some(r => r.sectionId === 'section-15' && r.score >= 80) ? (
                       <button 
@@ -518,7 +613,7 @@ export default function App() {
                           <Trophy size={20} />
                         </div>
                         <div className="text-left">
-                          <p className="font-bold text-emerald-900">MWD Professional</p>
+                          <p className="font-bold text-emerald-900 font-display">MWD Professional</p>
                           <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider">Verified Certification</p>
                         </div>
                       </button>
@@ -535,7 +630,7 @@ export default function App() {
                     <UserIcon size={40} />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold">Sign in to track progress</h3>
+                    <h3 className="text-xl font-bold font-display">Sign in to track progress</h3>
                     <p className="text-sm text-zinc-500 max-w-[200px] mx-auto">Save your quiz results and earn your MWD Professional certification.</p>
                   </div>
                   <button 
@@ -558,14 +653,14 @@ export default function App() {
           className={`flex flex-col items-center gap-1 ${view === 'curriculum' ? 'text-zinc-900' : 'text-zinc-400'}`}
         >
           <BookOpen size={20} />
-          <span className="text-[10px] font-bold uppercase">Learn</span>
+          <span className="text-[10px] font-bold uppercase font-display">Learn</span>
         </button>
         <button 
           onClick={() => setView('profile')}
           className={`flex flex-col items-center gap-1 ${view === 'profile' ? 'text-zinc-900' : 'text-zinc-400'}`}
         >
           <UserIcon size={20} />
-          <span className="text-[10px] font-bold uppercase">Profile</span>
+          <span className="text-[10px] font-bold uppercase font-display">Profile</span>
         </button>
       </nav>
     </div>
