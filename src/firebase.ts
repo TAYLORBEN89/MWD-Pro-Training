@@ -16,10 +16,16 @@ import {
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
+// Use environment variable for API key if available, otherwise fallback to config file
+const config = {
+  ...firebaseConfig,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || firebaseConfig.apiKey
+};
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(config);
 export const auth = getAuth(app);
-export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+export const db = getFirestore(app, config.firestoreDatabaseId);
 export const googleProvider = new GoogleAuthProvider();
 
 // Auth Helpers
