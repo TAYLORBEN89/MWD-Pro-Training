@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user information and preferences.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique ID of the user." },
+        "displayName": { "type": "string", "description": "The user's display name." },
+        "email": { "type": "string", "description": "The user's email address." },
+        "photoURL": { "type": "string", "description": "The user's profile photo URL." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the profile was created." }
+      },
+      "required": ["uid", "email"]
+    },
+    "QuizResult": {
+      "title": "Quiz Result",
+      "description": "Stores the results of a completed quiz section.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The ID of the user who took the quiz." },
+        "sectionId": { "type": "string", "description": "The ID of the quiz section." },
+        "sectionTitle": { "type": "string", "description": "The title of the quiz section." },
+        "score": { "type": "number", "description": "The score achieved (percentage)." },
+        "correctAnswers": { "type": "number", "description": "The number of correct answers." },
+        "totalQuestions": { "type": "number", "description": "The total number of questions in the quiz." },
+        "completedAt": { "type": "string", "format": "date-time", "description": "When the quiz was completed." }
+      },
+      "required": ["uid", "sectionId", "score", "completedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profile documents."
+    },
+    "/results/{resultId}": {
+      "schema": "QuizResult",
+      "description": "Individual quiz results."
+    }
+  }
+}
