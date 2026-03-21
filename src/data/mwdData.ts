@@ -1436,128 +1436,168 @@ Understanding tool physics allows MWD techs to:
     title: 'Survey Fundamentals',
     content: `This section explains how MWD tools measure inclination, azimuth, and toolface — and how those measurements are converted into surveys that directional drillers rely on. A strong grasp of survey fundamentals is essential for accurate well placement and high quality MWD work.
 
-4.1 What Is a Survey?
+---
+
+### 4.1 What Is a Survey?
 A survey is a directional measurement taken at a specific depth that describes the 3D position of the wellbore. Each survey includes:
-• Inclination (angle from vertical)
-• Azimuth (compass direction)
-• Toolface (orientation of the tool)
-• Measured Depth (MD)
+*   **Inclination** (angle from vertical)
+*   **Azimuth** (compass direction)
+*   **Toolface** (orientation of the tool)
+*   **Measured Depth (MD)**
+
 Surveys are taken at regular intervals (e.g., every 30 ft, 90 ft, or 100 ft) depending on operator requirements.
 
-4.2 Gravity and Magnetic Field Vectors
+---
+
+### 4.2 Gravity and Magnetic Field Vectors
 MWD tools measure two sets of vectors:
-Gravity vectors (from accelerometers)
+
+#### Gravity vectors (from accelerometers)
 Used to calculate:
-• Inclination
-• Gravity toolface
-Magnetic vectors (from magnetometers)
+*   **Inclination**
+*   **Gravity toolface**
+
+#### Magnetic vectors (from magnetometers)
 Used to calculate:
-• Azimuth
-• Magnetic toolface
+*   **Azimuth**
+*   **Magnetic toolface**
+
 The tool combines these vectors to determine its orientation in 3D space.
 
-4.3 Inclination
-Inclination is the angle between the wellbore and vertical.
-• 0° = perfectly vertical
-• 90° = perfectly horizontal
-Calculated using accelerometer data:
-• High side direction
-• Gravity magnitude
-• Tool orientation
-Inclination is generally more stable than azimuth because gravity is a strong, consistent reference.
+---
 
-4.4 Azimuth
+### 4.3 Inclination
+Inclination is the angle between the wellbore and vertical.
+*   **0°** = perfectly vertical
+*   **90°** = perfectly horizontal
+
+Calculated using accelerometer data:
+*   High side direction
+*   Gravity magnitude
+*   Tool orientation
+
+> **Note:** Inclination is generally more stable than azimuth because gravity is a strong, consistent reference.
+
+---
+
+### 4.4 Azimuth
 Azimuth is the compass direction of the wellbore, measured clockwise from north (0–360°).
+
 Azimuth is calculated using:
-• Magnetic field vectors
-• Gravity vectors (to correct for tool tilt)
+*   Magnetic field vectors
+*   Gravity vectors (to correct for tool tilt)
+
 Azimuth is more sensitive to:
-• Magnetic interference
-• BHA components
-• Casing
-• Formation magnetism
-• Temperature
+*   **Magnetic interference** (drill collars, motors, casing, formation magnetism)
+*   **Temperature effects**
+
 Understanding azimuth quality is essential for survey QC.
 
-4.5 Toolface
+---
+
+### 4.5 Toolface
 Toolface describes the orientation of the tool relative to a reference.
+
 Two types:
-Gravity Toolface
-Used in sliding mode (motor runs). Reference: high side of the hole.
-Magnetic Toolface
-Used in rotary mode. Reference: magnetic north.
+1.  **Gravity Toolface:** Used in sliding mode (motor runs). Reference: high side of the hole.
+2.  **Magnetic Toolface:** Used in rotary mode. Reference: magnetic north.
+
 Toolface is critical for steering decisions.
 
-4.6 Survey Stations
+---
+
+### 4.6 Survey Stations
 A survey station is a depth where a survey is taken.
+
 Survey intervals depend on:
-• Operator requirements
-• Well complexity
-• Anti collision rules
-• Tool capabilities
+*   Operator requirements
+*   Well complexity
+*   Anti-collision rules
+*   Tool capabilities
+
 Common intervals: 30 ft, 90 ft, 100 ft.
 
-4.7 Minimum Curvature Method
+---
+
+### 4.7 Minimum Curvature Method
 The minimum curvature method is the industry standard for calculating the 3D path between survey stations.
+
 It uses:
-• Inclination
-• Azimuth
-• MD
-• Dogleg severity (DLS)
+*   Inclination
+*   Azimuth
+*   Measured Depth (MD)
+*   Dogleg severity (DLS)
+
 This method assumes the smoothest possible curve between two points.
 
-4.8 Dogleg Severity (DLS)
-DLS measures how sharply the wellbore is turning.
+---
+
+### 4.8 Dogleg Severity (DLS)
+DLS measures how sharply the wellbore is turning (usually expressed in degrees per 100 ft or 30 meters).
+
 High DLS can cause:
-• Torque and drag
-• BHA stress
-• Survey errors
-• Toolface instability
+*   Torque and drag
+*   BHA stress
+*   Survey errors
+*   Toolface instability
+
 MWD techs must monitor DLS to ensure data quality and drilling efficiency.
 
-4.9 Survey Quality Control (QC)
+---
+
+### 4.9 Survey Quality Control (QC)
 Survey QC includes checking:
-• Gravity magnitude
-• Magnetic magnitude
-• Dip angle
-• Cross axial interference
-• Sensor balance
-• Temperature effects
-• Consistency with previous surveys
+*   Gravity magnitude (G-Total)
+*   Magnetic magnitude (B-Total)
+*   Dip angle
+*   Cross-axial interference
+*   Sensor balance and temperature effects
+
 Good QC prevents inaccurate well placement.
 
-4.10 Magnetic Interference
+---
+
+### 4.10 Magnetic Interference
 Magnetic interference distorts magnetometer readings, causing azimuth errors.
+
 Sources include:
-• Drill collars
-• Motors
-• Stabilizers
-• Casing
-• Formation magnetism
+*   Drill collars, motors, and stabilizers
+*   Casing (nearby wells)
+*   Formation magnetism
+
 Interference is one of the most common causes of survey inaccuracy.
 
-4.11 In Field Referencing (IFR)
+---
+
+### 4.11 In-Field Referencing (IFR)
 IFR corrects magnetic field values using:
-• Local magnetic models
-• Reference stations
-• Survey correction algorithms
+*   Local magnetic models
+*   Reference stations
+*   Survey correction algorithms
+
 IFR improves azimuth accuracy in areas with magnetic anomalies.
 
-4.12 Multi Station Analysis (MSA)
+---
+
+### 4.12 Multi-Station Analysis (MSA)
 MSA uses multiple surveys to detect:
-• Sensor bias
-• Magnetic interference
-• Accelerometer drift
-• Tool misalignment
+*   Sensor bias
+*   Magnetic interference
+*   Accelerometer drift
+*   Tool misalignment
+
 MSA is a powerful QC tool for high accuracy wells.
 
-4.13 Why Survey Fundamentals Matter
+---
+
+### 4.13 Why Survey Fundamentals Matter
 Accurate surveys are essential for:
-• Steering the well
-• Avoiding collisions
-• Hitting the target zone
-• Maintaining wellbore quality
-• Ensuring safe operations
+*   Steering the well
+*   Avoiding collisions
+*   Hitting the target zone
+*   Maintaining wellbore quality
+*   Ensuring safe operations
+
 A strong understanding of survey fundamentals is one of the most important skills an MWD tech can develop.`,
     quizQuestions: [
       {
