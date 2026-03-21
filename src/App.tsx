@@ -2,6 +2,21 @@ import React, { useState, useMemo, useEffect, Component, ReactNode } from 'react
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import { 
+  ToolfaceDial, 
+  WellboreTrajectory, 
+  ToolArchitecture, 
+  MagneticInterference, 
+  VibrationMonitor,
+  MudPulseSimulator,
+  FormationLog,
+  RigWorkflow,
+  FailureDiagnosis,
+  SteeringSimulator,
+  GeosteeringInterpretation,
+  AdvancedLogs,
+  SurveyQuality
+} from './components/visualizations';
+import { 
   BookOpen, 
   GraduationCap, 
   ChevronRight, 
@@ -334,6 +349,118 @@ export default function App() {
                       <div className="prose prose-zinc prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-zinc-600 prose-p:leading-relaxed prose-li:text-zinc-600 prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-hr:border-zinc-100 max-w-none">
                         <ReactMarkdown>{currentSection.content}</ReactMarkdown>
                       </div>
+
+                      {currentSection.id === 'section-2' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Interactive Vibration Monitor</h3>
+                          <p className="text-sm text-zinc-500">Simulate different downhole vibration and shock regimes to understand their impact on tool health.</p>
+                          <VibrationMonitor />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-3' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Interactive Tool Architecture</h3>
+                          <p className="text-sm text-zinc-500">Explore the internal components of a professional MWD tool string.</p>
+                          <ToolArchitecture />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-4' && (
+                        <div className="mt-12 space-y-12">
+                          <div className="space-y-4">
+                            <h3 className="text-xl font-bold font-display text-zinc-900">Interactive Toolface Dial</h3>
+                            <p className="text-sm text-zinc-500">Practice orienting the tool using Gravity and Magnetic references.</p>
+                            <ToolfaceDial />
+                          </div>
+                          
+                          <div className="space-y-4">
+                            <h3 className="text-xl font-bold font-display text-zinc-900">Wellbore Trajectory Visualization</h3>
+                            <p className="text-sm text-zinc-500">See how Inclination and Azimuth define the 3D path of the well.</p>
+                            <WellboreTrajectory />
+                          </div>
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-5' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Magnetic Interference Simulator</h3>
+                          <p className="text-sm text-zinc-500">Visualize how axial and cross-axial magnetic distortion affects your survey vector.</p>
+                          <MagneticInterference />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-6' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Real-Time Formation Log</h3>
+                          <p className="text-sm text-zinc-500">Practice identifying lithology changes using Gamma Ray API units as you "drill" downhole.</p>
+                          <FormationLog />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-7' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Mud Pulse Telemetry Simulator</h3>
+                          <p className="text-sm text-zinc-500">Simulate binary encoding and decoding of pressure pulses in the mud column.</p>
+                          <MudPulseSimulator />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-8' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">MWD Operational Workflow</h3>
+                          <p className="text-sm text-zinc-500">Master the step-by-step procedures of an MWD field technician from tool prep to drilling.</p>
+                          <RigWorkflow />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-9' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Failure Diagnostic Lab</h3>
+                          <p className="text-sm text-zinc-500">Analyze real-time symptoms and downhole data to diagnose common MWD failure modes.</p>
+                          <FailureDiagnosis />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-10' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">3D Steering Simulator</h3>
+                          <p className="text-sm text-zinc-500">Experience directional control by adjusting toolface and switching between sliding and rotating modes.</p>
+                          <SteeringSimulator />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-11' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Vibration & Dynamics Monitor</h3>
+                          <p className="text-sm text-zinc-500">Monitor axial, lateral, and torsional vibration to identify downhole dysfunctions like stick-slip and whirl.</p>
+                          <VibrationMonitor />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-12' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Geosteering Interpretation</h3>
+                          <p className="text-sm text-zinc-500">Correlate real-time Gamma Ray logs with offset well data to make steering decisions and stay in-zone.</p>
+                          <GeosteeringInterpretation />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-13' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Advanced LWD Sensor Dashboard</h3>
+                          <p className="text-sm text-zinc-500">Explore advanced formation evaluation logs including Resistivity, Density, and Neutron porosity.</p>
+                          <AdvancedLogs />
+                        </div>
+                      )}
+
+                      {currentSection.id === 'section-14' && (
+                        <div className="mt-12 space-y-8">
+                          <h3 className="text-xl font-bold font-display text-zinc-900">Survey Quality Control</h3>
+                          <p className="text-sm text-zinc-500">Validate survey data by checking G-Total, B-Total, and Dip Angle against expected magnetic models.</p>
+                          <SurveyQuality />
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -384,7 +511,7 @@ export default function App() {
                             <div className="flex-1">
                               <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors font-display">{section.title}</h3>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">Module {index + 1}</span>
+                                <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold drop-shadow-[0_0_5px_rgba(52,211,153,0.8)]">Module {index + 1}</span>
                                 <span className="w-1 h-1 bg-zinc-700 rounded-full" />
                                 <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">{section.quizQuestions.length} Questions</span>
                               </div>
