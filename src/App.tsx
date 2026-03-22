@@ -262,7 +262,7 @@ export default function App() {
           </button>
 
           <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-bold">
-            Version 1.0.0 • Professional Edition
+            Version 1.0.1 • Professional Edition
           </p>
         </motion.div>
       </div>
