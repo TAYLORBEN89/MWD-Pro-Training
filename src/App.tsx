@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, Component, ReactNode } from 'react';
+import React, { useState, useMemo, useEffect, Component, ReactNode, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
 import { 
@@ -114,14 +114,16 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 export default function App() {
   const { user, login, logout, saveQuizResult, results, loading } = useFirebase();
   const [hasStarted, setHasStarted] = useState(false);
+  const prevUserRef = useRef(user);
 
   // Reset to landing page on logout
   useEffect(() => {
-    if (!user && hasStarted) {
+    if (prevUserRef.current && !user && hasStarted) {
       setHasStarted(false);
       setView('curriculum');
       setCurrentSectionId(null);
     }
+    prevUserRef.current = user;
   }, [user, hasStarted]);
 
   const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
