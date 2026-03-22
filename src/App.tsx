@@ -114,6 +114,16 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 export default function App() {
   const { user, login, logout, saveQuizResult, results, loading } = useFirebase();
   const [hasStarted, setHasStarted] = useState(false);
+
+  // Reset to landing page on logout
+  useEffect(() => {
+    if (!user && hasStarted) {
+      setHasStarted(false);
+      setView('curriculum');
+      setCurrentSectionId(null);
+    }
+  }, [user, hasStarted]);
+
   const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
   const [view, setView] = useState<'curriculum' | 'quiz' | 'results' | 'certification' | 'profile'>('curriculum');
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -139,6 +149,16 @@ export default function App() {
   const currentSection = useMemo(() => {
     return mwdCurriculum.find(s => s.id === currentSectionId);
   }, [currentSectionId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex flex-col items-center justify-center p-8 text-center">
+        <div className="w-16 h-16 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-6" />
+        <h2 className="text-white font-medium mb-2">Initializing Systems...</h2>
+        <p className="text-zinc-500 text-sm">Synchronizing downhole data</p>
+      </div>
+    );
+  }
 
   const startQuiz = (section: CurriculumSection) => {
     if (!section.quizQuestions || section.quizQuestions.length === 0) {
