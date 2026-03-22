@@ -204,7 +204,7 @@ export default function App() {
 
   if (!hasStarted) {
     return (
-      <div className="min-h-screen max-w-md mx-auto bg-[#0a0a0a] flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+      <div className="min-h-screen w-full max-w-md mx-auto bg-[#0a0a0a] flex flex-col items-center justify-center p-8 text-center relative overflow-y-auto">
         {/* Atmospheric Background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[120%] h-[120%] bg-[radial-gradient(circle_at_50%_50%,#1a1a1a_0%,transparent_70%)] opacity-50" />
@@ -249,7 +249,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen max-w-md mx-auto bg-zinc-50 flex flex-col relative overflow-hidden">
+      <div className="min-h-screen w-full max-w-md mx-auto bg-zinc-50 flex flex-col relative overflow-hidden shadow-2xl">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 p-4 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-zinc-100 max-w-md mx-auto">
         <div className="flex items-center gap-2">
@@ -511,7 +511,7 @@ export default function App() {
                             <div className="flex-1">
                               <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors font-display">{section.title}</h3>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold drop-shadow-[0_0_5px_rgba(52,211,153,0.8)]">Module {index + 1}</span>
+                                <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold">Module {index + 1}</span>
                                 <span className="w-1 h-1 bg-zinc-700 rounded-full" />
                                 <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">{section.quizQuestions.length} Questions</span>
                               </div>
