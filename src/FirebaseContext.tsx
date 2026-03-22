@@ -19,6 +19,7 @@ import {
   handleFirestoreError,
   OperationType
 } from './firebase';
+import { AlertCircle } from 'lucide-react';
 
 interface QuizResult {
   id: string;
@@ -45,11 +46,21 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<QuizResult[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     let unsubscribeResults: (() => void) | null = null;
 
+    // Safety timeout to prevent infinite loading if Firebase fails
+    const timeoutId = setTimeout(() => {
+      if (loading) {
+        console.warn("Firebase initialization timed out. Proceeding anyway.");
+        setLoading(false);
+      }
+    }, 5000);
+
     const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
+      clearTimeout(timeoutId);
       // Cleanup previous results subscription if it exists
       if (unsubscribeResults) {
         unsubscribeResults();
@@ -96,11 +107,17 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setResults([]);
       }
       setLoading(false);
+    }, (err) => {
+      console.error("Auth state change error:", err);
+      clearTimeout(timeoutId);
+      setError("Failed to connect to authentication services.");
+      setLoading(false);
     });
 
     return () => {
       unsubscribeAuth();
       if (unsubscribeResults) unsubscribeResults();
+      clearTimeout(timeoutId);
     };
   }, []);
 
@@ -135,8 +152,36 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+        <div className="bg-zinc-900/50 border border-red-500/20 p-6 rounded-2xl max-w-sm w-full text-center">
+          <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <AlertCircle className="text-red-500 w-6 h-6" />
+          </div>
+          <h2 className="text-white font-medium mb-2">Connection Error</h2>
+          <p className="text-zinc-400 text-sm mb-6">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="w-full bg-emerald-500 text-black font-bold py-3 rounded-xl hover:bg-emerald-400 transition-colors"
+          >
+            Retry Connection
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const logoutUser = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
-    <FirebaseContext.Provider value={{ user, loading, login, logout, saveQuizResult, results }}>
+    <FirebaseContext.Provider value={{ user, loading, login, logout: logoutUser, saveQuizResult, results }}>
       {children}
     </FirebaseContext.Provider>
   );
