@@ -47,6 +47,7 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<QuizResult[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   useEffect(() => {
     let unsubscribeResults: (() => void) | null = null;
@@ -122,15 +123,24 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const login = async () => {
+    setAuthError(null);
     try {
       await loginWithGoogle();
     } catch (error: any) {
-      if (error.code === 'auth/user-cancelled') {
+      if (error.code === 'auth/user-cancelled' || error.code === 'auth/popup-closed-by-user') {
         console.log('User cancelled the login popup');
         return;
       }
+      
+      let message = "Login failed. Please try again.";
+      if (error.code === 'auth/unauthorized-domain') {
+        message = "This domain is not authorized in Firebase. Please add it to 'Authorized Domains' in the Firebase Console.";
+      } else if (error.code === 'auth/popup-blocked') {
+        message = "Login popup was blocked by your browser. Please allow popups for this site.";
+      }
+      
       console.error('Login error:', error);
-      throw error;
+      setAuthError(message);
     }
   };
 
@@ -183,6 +193,26 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   return (
     <FirebaseContext.Provider value={{ user, loading, login, logout: logoutUser, saveQuizResult, results }}>
       {children}
+      
+      {/* Auth Error Toast */}
+      {authError && (
+        <div className="fixed bottom-4 left-4 right-4 z-[100] animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="bg-zinc-900 border border-red-500/20 p-4 rounded-xl shadow-2xl flex items-center gap-3">
+            <div className="w-8 h-8 bg-red-500/10 rounded-full flex items-center justify-center shrink-0">
+              <AlertCircle className="text-red-500 w-4 h-4" />
+            </div>
+            <div className="flex-1">
+              <p className="text-white text-xs font-medium leading-tight">{authError}</p>
+            </div>
+            <button 
+              onClick={() => setAuthError(null)}
+              className="text-zinc-500 hover:text-white text-xs font-bold px-2 py-1"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
     </FirebaseContext.Provider>
   );
 };
