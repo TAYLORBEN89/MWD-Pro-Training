@@ -1,0 +1,9 @@
+{
+	"appId": "com.mwdpro.app",
+	"appName": "MWD Pro",
+	"webDir": "dist",
+	"bundledWebRuntime": false,
+	"server": {
+		"androidScheme": "https"
+	}
+}
