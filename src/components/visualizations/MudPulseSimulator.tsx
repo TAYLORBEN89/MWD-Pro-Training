@@ -92,20 +92,20 @@ export const MudPulseSimulator: React.FC = () => {
   }, [dataStream, noise, isTransmitting]);
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl space-y-6">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-emerald-500/10 rounded-xl">
+          <div className="p-2 bg-emerald-500/10 rounded-xl shrink-0">
             <Radio className="text-emerald-500" size={24} />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white font-display">Mud Pulse Telemetry Simulator</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-white font-display">Mud Pulse Telemetry Simulator</h3>
             <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Positive Pulse Encoding (Manchester)</p>
           </div>
         </div>
         <button 
           onClick={() => setIsTransmitting(!isTransmitting)}
-          className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
+          className={`w-full md:w-auto px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
             isTransmitting ? 'bg-red-500/20 text-red-500 border border-red-500/20' : 'bg-emerald-500 text-zinc-900'
           }`}
         >

@@ -71,81 +71,98 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }, 5000);
 
     const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
-      clearTimeout(timeoutId);
-      
-      // Cleanup previous subscriptions
-      if (unsubscribeResults) {
-        unsubscribeResults();
-        unsubscribeResults = null;
-      }
-      if (unsubscribeUser) {
-        unsubscribeUser();
-        unsubscribeUser = null;
-      }
-
-      setUser(currentUser);
-      
-      if (currentUser) {
-        // Sync user profile to Firestore and listen for user profile updates
-        const userRef = doc(db, 'users', currentUser.uid);
+      try {
+        clearTimeout(timeoutId);
         
-        unsubscribeUser = onSnapshot(userRef, (docSnap) => {
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            setHasPurchased(true); // Always true, independent of database value to make the app free
-            setBadges(data.badges || []);
-          }
-        }, (err) => {
-          console.error("User profile listener error:", err);
-          if (err.message?.includes('permissions')) {
-            setError("Permission denied. This often happens if your browser blocks storage in the preview. Try opening the app in a new tab.");
-          }
-        });
-
-        try {
-          const profileData: any = {
-            uid: currentUser.uid,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-            createdAt: serverTimestamp()
-          };
-          
-          if (currentUser.email) {
-            profileData.email = currentUser.email;
-          }
-
-          await setDoc(userRef, profileData, { merge: true });
-        } catch (error) {
-          console.error("Error syncing user profile:", error);
+        // Cleanup previous subscriptions
+        if (unsubscribeResults) {
+          unsubscribeResults();
+          unsubscribeResults = null;
+        }
+        if (unsubscribeUser) {
+          unsubscribeUser();
+          unsubscribeUser = null;
         }
 
-        // Listen for quiz results
-        const resultsQuery = query(
-          collection(db, 'results'),
-          where('uid', '==', currentUser.uid),
-          orderBy('completedAt', 'desc')
-        );
-
-        unsubscribeResults = onSnapshot(resultsQuery, (snapshot) => {
-          const fetchedResults = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data()
-          })) as QuizResult[];
-          setResults(fetchedResults);
-        }, (error) => {
-          // Only report if we are still logged in
-          if (auth.currentUser) {
-            if (error.message?.includes('permissions')) {
+        setUser(currentUser);
+        
+        if (currentUser) {
+          // Sync user profile to Firestore and listen for user profile updates
+          const userRef = doc(db, 'users', currentUser.uid);
+          
+          unsubscribeUser = onSnapshot(userRef, (docSnap) => {
+            if (docSnap.exists()) {
+              const data = docSnap.data();
+              setHasPurchased(true); // Always true, independent of database value to make the app free
+              setBadges(data.badges || []);
+            }
+          }, (err) => {
+            console.error("User profile listener error:", err);
+            if (err.message?.includes('permissions')) {
               setError("Permission denied. This often happens if your browser blocks storage in the preview. Try opening the app in a new tab.");
             }
-            handleFirestoreError(error, OperationType.LIST, 'results');
+          });
+
+          try {
+            const profileData: any = {
+              uid: currentUser.uid,
+              displayName: currentUser.displayName,
+              photoURL: currentUser.photoURL,
+              createdAt: serverTimestamp()
+            };
+            
+            if (currentUser.email) {
+              profileData.email = currentUser.email;
+            }
+
+            await setDoc(userRef, profileData, { merge: true });
+          } catch (error) {
+            console.error("Error syncing user profile:", error);
           }
-        });
-      } else {
-        setResults([]);
-        setHasPurchased(true); // Always true for logged out users too
+
+          // Listen for quiz results
+          // Dropping orderBy to avoid index requirement; sorting on client instead
+          const resultsQuery = query(
+            collection(db, 'results'),
+            where('uid', '==', currentUser.uid)
+          );
+
+          unsubscribeResults = onSnapshot(resultsQuery, (snapshot) => {
+            const fetchedResults = snapshot.docs.map(doc => ({
+              id: doc.id,
+              ...doc.data()
+            })) as QuizResult[];
+            
+            // Client-side sort to completely avoid composite index failed-preconditions
+            fetchedResults.sort((a, b) => {
+              const getMs = (val: any) => {
+                if (!val) return 0;
+                if (typeof val.toMillis === 'function') return val.toMillis();
+                if (val.seconds) return val.seconds * 1000;
+                return new Date(val).getTime() || 0;
+              };
+              return getMs(b.completedAt) - getMs(a.completedAt);
+            });
+            
+            setResults(fetchedResults);
+          }, (error) => {
+            // Only report if we are still logged in
+            if (auth.currentUser) {
+              if (error.message?.includes('permissions')) {
+                setError("Permission denied. This often happens if your browser blocks storage in the preview. Try opening the app in a new tab.");
+              }
+              handleFirestoreError(error, OperationType.LIST, 'results');
+            }
+          });
+        } else {
+          setResults([]);
+          setHasPurchased(true); // Always true for logged out users too
+        }
+        setLoading(false);
+      } catch (err: any) {
+        console.error("Critical error in onAuthStateChanged callback:", err);
+        setLoading(false);
       }
-      setLoading(false);
     }, (err) => {
       console.error("Auth state change error:", err);
       clearTimeout(timeoutId);
@@ -249,6 +266,15 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
               className="w-full bg-zinc-800 text-white font-bold py-3 rounded-xl hover:bg-zinc-700 transition-colors"
             >
               Open in New Tab
+            </button>
+            <button 
+              onClick={() => {
+                setError(null);
+                setLoading(false);
+              }}
+              className="w-full bg-zinc-900 text-zinc-300 font-bold py-3 rounded-xl hover:bg-zinc-800 border border-zinc-800 transition-colors"
+            >
+              Continue Offline / Guest Mode
             </button>
           </div>
         </div>

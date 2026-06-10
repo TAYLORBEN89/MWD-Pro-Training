@@ -55,14 +55,14 @@ export const RigWorkflow: React.FC = () => {
   const allTasksDone = currentStep.tasks.every(t => completedTasks.includes(t));
 
   return (
-    <div className="bg-white rounded-3xl p-8 border border-zinc-200 shadow-xl">
-      <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-start">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl">
+      <div className="flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h3 className="text-2xl font-bold text-zinc-900 font-display">MWD Operational Workflow</h3>
-            <p className="text-sm text-zinc-500">Master the step-by-step procedures of an MWD field technician.</p>
+            <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 font-display">MWD Operational Workflow</h3>
+            <p className="text-xs sm:text-sm text-zinc-500">Master the step-by-step procedures of an MWD field technician.</p>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 shrink-0 self-end sm:self-auto">
             {workflowSteps.map((_, i) => (
               <div 
                 key={i} 
@@ -99,7 +99,7 @@ export const RigWorkflow: React.FC = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="lg:col-span-8 bg-zinc-50 rounded-3xl p-6 border border-zinc-100">
+          <div className="lg:col-span-8 bg-zinc-50 rounded-3xl p-4 sm:p-6 border border-zinc-100">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep}

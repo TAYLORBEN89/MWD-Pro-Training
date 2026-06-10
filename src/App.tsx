@@ -342,13 +342,17 @@ export default function App() {
   const handleViewResults = async () => {
     const score = Math.round((calculateScore() / currentQuizQuestions.length) * 100);
     if (user && currentSection) {
-      await saveQuizResult(
-        currentSection.id,
-        currentSection.title,
-        score,
-        calculateScore(),
-        currentQuizQuestions.length
-      );
+      try {
+        await saveQuizResult(
+          currentSection.id,
+          currentSection.title,
+          score,
+          calculateScore(),
+          currentQuizQuestions.length
+        );
+      } catch (error) {
+        console.error("Failed to save quiz results to database. Progress may not be synced:", error);
+      }
     }
     setView('results');
   };

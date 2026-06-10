@@ -101,8 +101,8 @@ export const WellboreTrajectory: React.FC = () => {
   const currentPoint = visibleData[visibleData.length - 1] || surveyData[0];
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-2">
           <div className="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg">
             <Activity size={20} />
@@ -112,12 +112,12 @@ export const WellboreTrajectory: React.FC = () => {
             <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">3D Path Visualization</p>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full sm:w-auto">
           {(['vertical', 'build', 'turn'] as const).map((type) => (
             <button
               key={type}
               onClick={() => setWellType(type)}
-              className={`px-3 py-1 rounded-full text-[8px] font-bold uppercase tracking-widest transition-all ${wellType === type ? 'bg-emerald-500 text-zinc-900' : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700'}`}
+              className={`flex-1 sm:flex-initial text-center px-3 py-1.5 rounded-full text-[8px] font-bold uppercase tracking-widest transition-all ${wellType === type ? 'bg-emerald-500 text-zinc-900' : 'bg-zinc-800 text-zinc-500 hover:bg-zinc-700'}`}
             >
               {type}
             </button>
@@ -125,14 +125,14 @@ export const WellboreTrajectory: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[400px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Profile View (TVD vs VS) */}
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
             <MoveDown size={12} />
             <span>Profile View (TVD vs VS)</span>
           </div>
-          <div className="h-full bg-zinc-950/50 rounded-2xl p-2 border border-zinc-800/50">
+          <div className="h-[220px] md:h-[280px] bg-zinc-950/50 rounded-2xl p-2 border border-zinc-800/50">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={visibleData} margin={{ top: 10, right: 10, left: -20, bottom: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" vertical={false} />
@@ -162,7 +162,7 @@ export const WellboreTrajectory: React.FC = () => {
             <Compass size={12} />
             <span>Plan View (North vs East)</span>
           </div>
-          <div className="h-full bg-zinc-950/50 rounded-2xl p-2 border border-zinc-800/50">
+          <div className="h-[220px] md:h-[280px] bg-zinc-950/50 rounded-2xl p-2 border border-zinc-800/50">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={visibleData} margin={{ top: 10, right: 10, left: -20, bottom: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />

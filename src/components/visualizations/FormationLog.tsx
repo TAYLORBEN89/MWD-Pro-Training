@@ -38,20 +38,20 @@ export const FormationLog: React.FC = () => {
   }, [isDrilling, depth, gammaRay]);
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl space-y-6">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-emerald-500/10 rounded-xl">
             <Layers className="text-emerald-500" size={24} />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white font-display">Real-Time Formation Evaluation</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-white font-display">Real-Time Formation Evaluation</h3>
             <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Gamma Ray & Lithology Log</p>
           </div>
         </div>
         <button 
           onClick={() => setIsDrilling(!isDrilling)}
-          className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
+          className={`w-full md:w-auto px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
             isDrilling ? 'bg-red-500/20 text-red-500 border border-red-500/20' : 'bg-emerald-500 text-zinc-900'
           }`}
         >
@@ -59,9 +59,9 @@ export const FormationLog: React.FC = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-[400px]">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-auto md:h-[400px]">
         {/* Log Track */}
-        <div className="md:col-span-3 bg-black/40 rounded-2xl border border-zinc-800 p-4 relative overflow-hidden flex flex-col">
+        <div className="md:col-span-3 bg-black/40 rounded-2xl border border-zinc-800 p-4 relative overflow-hidden flex flex-col h-[250px] md:h-full">
           <div className="flex justify-between text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-800 pb-2 mb-2">
             <span>Gamma Ray (API)</span>
             <div className="flex gap-10">

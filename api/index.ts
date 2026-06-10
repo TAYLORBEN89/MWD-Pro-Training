@@ -513,6 +513,15 @@ async function startServer() {
   });
 }
 
+// Process-level Crash Prevention and Diagnostics
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("CRITICAL: Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+process.on("uncaughtException", (error) => {
+  console.error("CRITICAL: Uncaught Exception caught:", error);
+});
+
 startServer();
 
 export default app;

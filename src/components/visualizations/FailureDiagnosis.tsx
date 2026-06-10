@@ -60,22 +60,22 @@ export const FailureDiagnosis: React.FC = () => {
   };
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
       {/* Background Grid Accent */}
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="relative flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+      <div className="relative flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-red-500/10 rounded-xl">
+            <div className="p-2 bg-red-500/10 rounded-xl shrink-0">
               <AlertTriangle className="text-red-500" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white font-display">MWD Failure Diagnostic Lab</h3>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Post-Run Analysis Simulator</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">Post-Run Failure Diagnostic</h3>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Analysis Lab Simulator</p>
             </div>
           </div>
-          <div className="bg-zinc-800 px-4 py-2 rounded-xl border border-zinc-700">
+          <div className="bg-zinc-800 px-4 py-2 rounded-xl border border-zinc-700 shrink-0 self-end sm:self-auto">
             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Score</p>
             <p className="text-xl font-mono text-white leading-none">{score}</p>
           </div>

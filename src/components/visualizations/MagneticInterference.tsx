@@ -111,15 +111,14 @@ export const MagneticInterference: React.FC = () => {
   const isSevere = totalInterference > 0.5;
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl">
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         {/* Visualization */}
-        <div className="relative">
+        <div className="relative w-full max-w-[300px] mx-auto lg:mx-0">
           <svg 
             ref={svgRef} 
-            width={width} 
-            height={height} 
-            className="drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+            viewBox={`0 0 ${width} ${height}`}
+            className="w-full h-auto max-w-[300px] drop-shadow-[0_0_30px_rgba(0,0,0,0.5)]"
           />
           
           <div className="absolute top-4 left-4 flex flex-col gap-2">

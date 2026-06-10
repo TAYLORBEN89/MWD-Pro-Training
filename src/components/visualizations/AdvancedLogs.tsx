@@ -52,25 +52,25 @@ export const AdvancedLogs: React.FC = () => {
   const currentLog = logTypes[activeLog];
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
       {/* Background Grid Accent */}
       <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
-      <div className="relative flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+      <div className="relative flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-500/10 rounded-xl">
+            <div className="p-2 bg-blue-500/10 rounded-xl shrink-0">
               <Layers className="text-blue-500" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white font-display">Advanced Formation Evaluation</h3>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">LWD Multi-Sensor Interpretation</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">Advanced Formation Evaluation</h3>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">LWD Multi-Sensor Interpretation</p>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <button 
               onClick={() => setShowInterpretation(!showInterpretation)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all border ${
+              className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all border ${
                 showInterpretation ? 'bg-blue-500 text-white border-blue-500' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:border-zinc-500'
               }`}
             >

@@ -27,21 +27,21 @@ export const VibrationMonitor: React.FC = () => {
   };
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl">
-      <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl">
+      <div className="flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-emerald-500/10 rounded-xl">
               <Activity className="text-emerald-500" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white font-display">Real-Time Vibration Monitor</h3>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Downhole Dynamics Simulation</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">Real-Time Vibration Monitor</h3>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Downhole Dynamics Simulation</p>
             </div>
           </div>
           <button 
             onClick={() => setIsSimulating(!isSimulating)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
+            className={`w-full sm:w-auto px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
               isSimulating ? 'bg-red-500/20 text-red-500 border border-red-500/20' : 'bg-emerald-500 text-zinc-900'
             }`}
           >
@@ -57,13 +57,13 @@ export const VibrationMonitor: React.FC = () => {
           ].map((vib, i) => {
             const status = getStatus(vib.value);
             return (
-              <div key={i} className="bg-zinc-800/50 rounded-2xl p-4 border border-zinc-700/50 space-y-4">
+              <div key={i} className="bg-zinc-800/50 rounded-2xl p-3 border border-zinc-700/50 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{vib.label}</span>
                   <span className={`text-[10px] font-bold uppercase tracking-widest ${status.color}`}>{status.label}</span>
                 </div>
                 
-                <div className="flex items-end gap-1 h-12">
+                <div className="flex items-end gap-1 h-6">
                   {[...Array(15)].map((_, j) => (
                     <motion.div 
                       key={j}
@@ -76,7 +76,7 @@ export const VibrationMonitor: React.FC = () => {
                   ))}
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className="flex justify-between text-xs font-mono">
                     <span className="text-zinc-500">Magnitude</span>
                     <span className="text-white">{vib.value.toFixed(1)} G</span>

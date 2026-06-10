@@ -99,34 +99,33 @@ export const ToolfaceDial: React.FC<ToolfaceDialProps> = ({ initialValue = 0 }) 
   }, [isSliding]);
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-6 border border-zinc-800 shadow-2xl space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl space-y-6">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <div className={`p-2 rounded-lg ${mode === 'gravity' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-blue-500/10 text-blue-500'}`}>
+          <div className={`p-2 rounded-lg shrink-0 ${mode === 'gravity' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-blue-500/10 text-blue-500'}`}>
             {mode === 'gravity' ? <Gauge size={20} /> : <Compass size={20} />}
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-              {mode === 'gravity' ? 'Gravity Toolface' : 'Magnetic Toolface'}
+            <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+              {mode === 'gravity' ? 'Gravity Toolface' : 'Magnetic'}
             </h3>
-            <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
-              Reference: {mode === 'gravity' ? 'High Side' : 'Magnetic North'}
+            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest leading-normal">
+              Ref: {mode === 'gravity' ? 'High Side' : 'North'}
             </p>
           </div>
         </div>
-        <div className="text-right">
-          <span className="text-2xl font-mono font-bold text-white">
+        <div className="text-right shrink-0">
+          <span className="text-xl sm:text-2xl font-mono font-bold text-white">
             {Math.round(toolface)}°
           </span>
         </div>
       </div>
 
-      <div className="flex justify-center py-4">
+      <div className="flex justify-center py-2 sm:py-4">
         <svg 
           ref={svgRef} 
-          width={size} 
-          height={size} 
-          className="drop-shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+          viewBox={`0 0 ${size} ${size}`}
+          className="w-full h-auto max-w-[280px] drop-shadow-[0_0_20px_rgba(0,0,0,0.5)]"
         />
       </div>
 

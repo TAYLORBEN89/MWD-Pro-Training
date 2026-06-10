@@ -57,22 +57,22 @@ export const SteeringSimulator: React.FC = () => {
   const isOffTarget = Math.abs(lastPos.x - targetX) > 10;
 
   return (
-    <div className="bg-white rounded-3xl p-8 border border-zinc-200 shadow-xl overflow-hidden">
-      <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl overflow-hidden">
+      <div className="flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-500/10 rounded-xl">
+            <div className="p-2 bg-indigo-500/10 rounded-xl shrink-0">
               <Navigation className="text-indigo-500" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-zinc-900 font-display">3D Steering Simulator</h3>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Directional Control & Well Path Planning</p>
+              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 font-display">3D Steering Simulator</h3>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Directional Control & Well Path Planning</p>
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             <button 
               onClick={() => setIsDrilling(!isDrilling)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 ${
+              className={`flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
                 isDrilling ? 'bg-red-500 text-white' : 'bg-zinc-900 text-white'
               }`}
             >
@@ -81,7 +81,7 @@ export const SteeringSimulator: React.FC = () => {
             </button>
             <button 
               onClick={reset}
-              className="p-2 bg-zinc-100 text-zinc-500 rounded-xl hover:bg-zinc-200 transition-colors"
+              className="p-2.5 bg-zinc-100 text-zinc-500 rounded-xl hover:bg-zinc-200 transition-colors flex items-center justify-center"
             >
               <RefreshCw size={20} />
             </button>

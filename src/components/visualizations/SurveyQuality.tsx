@@ -26,19 +26,19 @@ export const SurveyQuality: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-8 border border-zinc-200 shadow-xl overflow-hidden">
-      <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl overflow-hidden">
+      <div className="flex flex-col gap-6 sm:gap-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-500/10 rounded-xl">
+            <div className="p-2 bg-indigo-500/10 rounded-xl shrink-0">
               <Compass className="text-indigo-500" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-zinc-900 font-display">Survey Quality Control Lab</h3>
-              <p className="text-xs text-zinc-500 uppercase tracking-widest font-bold">Validation & Error Analysis</p>
+              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 font-display">Survey Quality Control Lab</h3>
+              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Validation & Error Analysis</p>
             </div>
           </div>
-          <div className="bg-zinc-100 px-4 py-2 rounded-xl border border-zinc-200">
+          <div className="bg-zinc-100 px-4 py-2 rounded-xl border border-zinc-200 shrink-0 self-end sm:self-auto">
             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Validated</p>
             <p className="text-xl font-mono text-zinc-900 leading-none">{score}</p>
           </div>
