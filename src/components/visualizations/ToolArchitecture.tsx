@@ -379,7 +379,7 @@ export const ToolArchitecture: React.FC = () => {
           <div id="collar-details-column" className="lg:col-span-7 flex flex-col gap-6">
             
             {/* Component Detail Module Card */}
-            <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden min-h-[440px] xs:min-h-[395px] sm:min-h-[305px] md:min-h-[285px] lg:min-h-[405px] xl:min-h-[350px]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedId}
@@ -390,20 +390,22 @@ export const ToolArchitecture: React.FC = () => {
                   className="space-y-6"
                 >
                   {/* Title block */}
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3.5 rounded-2xl ${selectedComp.color} text-zinc-950 shadow-lg shrink-0`}>
-                      <selectedComp.icon size={26} className="text-white" />
+                  <div className="space-y-3">
+                    {/* Tech label seated ABOVE the icon and heading */}
+                    <div className="flex flex-wrap items-center">
+                      <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-400 bg-zinc-950 px-2.5 py-1 rounded-md border border-zinc-800 tracking-wider">
+                        {selectedComp.techLabel}
+                      </span>
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[10px] sm:text-xs font-mono font-bold text-emerald-400 uppercase bg-emerald-500/15 border border-emerald-500/20 px-2 py-0.5 rounded-full shrink-0">
-                          COMPONENT INSIDE SHIELD
-                        </span>
-                        <span className="text-[9px] font-mono font-bold text-zinc-400 bg-zinc-950 px-2 py-0.5 rounded-md border border-zinc-800 truncate max-w-full">
-                          {selectedComp.techLabel}
-                        </span>
+
+                    {/* Icon and Heading seated next to each other */}
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2.5 rounded-xl ${selectedComp.color} text-zinc-950 shadow-md shrink-0 flex items-center justify-center`}>
+                        <selectedComp.icon size={22} className="text-white" />
                       </div>
-                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-1.5 break-words">{selectedComp.name}</h4>
+                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight break-words">
+                        {selectedComp.name}
+                      </h4>
                     </div>
                   </div>
 
