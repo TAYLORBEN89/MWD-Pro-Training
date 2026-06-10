@@ -53,7 +53,7 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<QuizResult[]>([]);
-  const [hasPurchased, setHasPurchased] = useState(false);
+  const [hasPurchased, setHasPurchased] = useState(true);
   const [badges, setBadges] = useState<Badge[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
@@ -86,13 +86,13 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       setUser(currentUser);
       
       if (currentUser) {
-        // Sync user profile to Firestore and listen for purchase status
+        // Sync user profile to Firestore and listen for user profile updates
         const userRef = doc(db, 'users', currentUser.uid);
         
         unsubscribeUser = onSnapshot(userRef, (docSnap) => {
           if (docSnap.exists()) {
             const data = docSnap.data();
-            setHasPurchased(!!data.hasPurchased);
+            setHasPurchased(true); // Always true, independent of database value to make the app free
             setBadges(data.badges || []);
           }
         }, (err) => {
@@ -143,7 +143,7 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         });
       } else {
         setResults([]);
-        setHasPurchased(false);
+        setHasPurchased(true); // Always true for logged out users too
       }
       setLoading(false);
     }, (err) => {

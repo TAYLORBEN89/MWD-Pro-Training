@@ -171,20 +171,15 @@ export default function App() {
         return res.json();
       })
       .then(data => {
-        console.log("Stripe Config Received:", data);
+        console.log("Configuration status loaded:", data);
         setApiStatus('connected');
         
         if (data.config) {
           setServerConfig(data.config);
         }
         
-        // Ensure the key is valid before saving it
         if (data.stripePublishableKey && data.stripePublishableKey.length > 5) {
           setStripePubKey(data.stripePublishableKey);
-          console.log("Stripe Key set to:", data.stripePublishableKey);
-        } else {
-          console.error("The server returned an empty or invalid Stripe key.");
-          setPurchaseError("Stripe keys missing on server. Check AI Studio Secrets.");
         }
         
         if (data.serverTime) {
@@ -192,9 +187,8 @@ export default function App() {
         }
       })
       .catch(err => {
-        console.error("CRITICAL: Failed to fetch Stripe config:", err);
+        console.warn("Could not load backend config:", err);
         setApiStatus('error');
-        setPurchaseError(`Connection Failed: ${err.message || "Unknown Error"}`);
       });
   }, [user]);
 
@@ -406,11 +400,11 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen w-full max-w-md mx-auto bg-zinc-50 flex flex-col relative overflow-hidden shadow-2xl">
+      <div className="min-h-screen w-full max-w-md mx-auto bg-zinc-200 flex flex-col relative overflow-hidden shadow-2xl">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 p-4 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-zinc-100 max-w-md mx-auto">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-zinc-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+          <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-zinc-950 shadow-md shadow-emerald-500/20">
             <GraduationCap size={24} />
           </div>
           <div>
@@ -502,8 +496,8 @@ export default function App() {
                   <div className="space-y-6">
                     <h2 className="text-3xl font-bold tracking-tight text-zinc-900 leading-tight font-display">{currentSection.title}</h2>
                     
-                    <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-zinc-100">
-                      <div className="prose prose-zinc prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-zinc-600 prose-p:leading-relaxed prose-li:text-zinc-600 prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-hr:border-zinc-100 max-w-none">
+                    <div className="space-y-6">
+                      <div className="prose prose-zinc prose-headings:font-bold prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:text-zinc-800 prose-p:leading-relaxed prose-li:text-zinc-800 prose-blockquote:border-l-4 prose-blockquote:border-emerald-500 prose-blockquote:bg-emerald-50/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-hr:border-zinc-200 max-w-none">
                         <ReactMarkdown>{currentSection.content}</ReactMarkdown>
                       </div>
 
@@ -649,8 +643,7 @@ export default function App() {
                       className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all text-sm"
                     />
                   </div>
-                  
-                  <div className="grid gap-4">
+                                   <div className="grid gap-3 sm:gap-4">
                     {filteredCurriculum.map((section) => {
                       const index = mwdCurriculum.findIndex(s => s.id === section.id);
                       const isCompleted = results.some(r => r.sectionId === section.id && r.score >= 80);
@@ -666,31 +659,38 @@ export default function App() {
                             }
                             setCurrentSectionId(section.id);
                           }}
-                          className={`group relative hardware-card p-6 border border-white/5 hover:border-emerald-500/50 transition-all text-left overflow-hidden active:scale-[0.98] ${isCompleted ? 'border-emerald-500/30' : ''} ${index >= 3 && !hasPurchased ? 'opacity-75 grayscale-[0.5]' : ''}`}
+                          className={`group relative hardware-card p-4 sm:p-5 md:p-6 border border-white/5 hover:border-emerald-500/50 transition-all text-left overflow-hidden active:scale-[0.98] ${isCompleted ? 'border-emerald-500/30' : ''} ${index >= 3 && !hasPurchased ? 'opacity-75 grayscale-[0.5]' : ''}`}
                         >
-                          <div className="flex items-center gap-5">
-                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-bold transition-colors shrink-0 font-display ${isCompleted ? 'bg-emerald-500 text-zinc-900' : 'bg-white/5 text-zinc-500 group-hover:bg-emerald-500 group-hover:text-zinc-900'}`}>
-                              {index >= 3 && !hasPurchased ? <Lock size={20} /> : (isCompleted ? <CheckCircle2 size={24} /> : index + 1)}
+                          <div className="flex items-center gap-3 sm:gap-5">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center font-bold transition-colors shrink-0 font-display ${isCompleted ? 'bg-emerald-500 text-zinc-900' : 'bg-white/5 text-zinc-500 group-hover:bg-emerald-500 group-hover:text-zinc-900'}`}>
+                              {index >= 3 && !hasPurchased ? <Lock size={16} /> : (isCompleted ? <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6" /> : <span className="text-xs sm:text-sm">{index + 1}</span>)}
                             </div>
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2">
-                                <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors font-display">{section.title}</h3>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-emerald-400 font-bold">Module {index + 1}</span>
                                 {index < 3 && !hasPurchased && (
                                   <span className="text-[8px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-widest">Free</span>
                                 )}
                               </div>
+                              <h3 className="font-bold text-white group-hover:text-emerald-400 transition-colors font-display text-sm sm:text-base leading-snug sm:leading-normal line-clamp-2 md:line-clamp-none">
+                                {section.title}
+                              </h3>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-[10px] uppercase tracking-widest text-emerald-400 font-bold">Module {index + 1}</span>
-                                <span className="w-1 h-1 bg-zinc-700 rounded-full" />
-                                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">{section.quizQuestions.length} Questions</span>
+                                <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-zinc-500 font-bold">{section.quizQuestions.length} Questions</span>
+                                {isCompleted && (
+                                  <>
+                                    <span className="w-1 h-1 bg-zinc-700 rounded-full" />
+                                    <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-emerald-400 font-bold">Completed</span>
+                                  </>
+                                )}
                               </div>
                             </div>
                             {index >= 3 && !hasPurchased ? (
-                              <div className="text-zinc-700">
-                                <Lock size={20} />
+                              <div className="text-zinc-700 shrink-0">
+                                <Lock size={18} />
                               </div>
                             ) : (
-                              <ChevronRight className="text-zinc-700 group-hover:text-emerald-500 transition-colors" size={20} />
+                              <ChevronRight className="text-zinc-700 group-hover:text-emerald-500 transition-colors shrink-0" size={18} />
                             )}
                           </div>
                         </button>
