@@ -135,7 +135,9 @@ export default function App() {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(registrations => {
         for (let registration of registrations) {
-          registration.unregister();
+          registration.unregister().catch(err => {
+            console.warn("Individual service worker unregistration failed:", err);
+          });
         }
       }).catch(err => {
         console.warn("Service worker unregistration failed:", err);
