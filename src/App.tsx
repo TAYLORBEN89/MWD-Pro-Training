@@ -137,6 +137,8 @@ export default function App() {
         for (let registration of registrations) {
           registration.unregister();
         }
+      }).catch(err => {
+        console.warn("Service worker unregistration failed:", err);
       });
     }
   }, []);

@@ -151,7 +151,7 @@ export const FirebaseProvider: React.FC<{ children: React.ReactNode }> = ({ chil
               if (error.message?.includes('permissions')) {
                 setError("Permission denied. This often happens if your browser blocks storage in the preview. Try opening the app in a new tab.");
               }
-              handleFirestoreError(error, OperationType.LIST, 'results');
+              handleFirestoreError(error, OperationType.LIST, 'results', false);
             }
           });
         } else {
