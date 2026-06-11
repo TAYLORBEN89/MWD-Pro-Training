@@ -34,7 +34,6 @@ import {
   AlertCircle,
   RefreshCcw,
   PlayCircle,
-  Search,
   Lock,
   CreditCard,
   Sparkles
@@ -264,7 +263,6 @@ export default function App() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [currentQuizQuestions, setCurrentQuizQuestions] = useState<QuizQuestion[]>([]);
 
-  const [searchTerm, setSearchTerm] = useState('');
   const [showCinemaAd, setShowCinemaAd] = useState(false);
 
   const overallProgress = useMemo(() => {
@@ -272,14 +270,6 @@ export default function App() {
     const completedUniqueSections = new Set(results.filter(r => r.score >= 80).map(r => r.sectionId));
     return Math.round((completedUniqueSections.size / mwdCurriculum.length) * 100);
   }, [results]);
-
-  const filteredCurriculum = useMemo(() => {
-    if (!searchTerm) return mwdCurriculum;
-    return mwdCurriculum.filter(s => 
-      s.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      s.content.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [searchTerm]);
 
   const currentSection = useMemo(() => {
     return mwdCurriculum.find(s => s.id === currentSectionId);
@@ -641,18 +631,8 @@ export default function App() {
                     <p className="text-sm text-zinc-500">Complete all 15 sections to earn your MWD Certification.</p>
                   </div>
 
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" size={18} />
-                    <input 
-                      type="text"
-                      placeholder="Search modules..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all text-sm"
-                    />
-                  </div>
-                                   <div className="grid gap-3 sm:gap-4">
-                    {filteredCurriculum.map((section) => {
+                  <div className="grid gap-3 sm:gap-4">
+                    {mwdCurriculum.map((section) => {
                       const index = mwdCurriculum.findIndex(s => s.id === section.id);
                       const isCompleted = results.some(r => r.sectionId === section.id && r.score >= 80);
                       
@@ -873,14 +853,6 @@ export default function App() {
                           </div>
                         </div>
                       </motion.div>
-                    )}
-                    {filteredCurriculum.length === 0 && (
-                      <div className="text-center py-12 space-y-3">
-                        <div className="w-16 h-16 bg-zinc-100 rounded-full flex items-center justify-center text-zinc-300 mx-auto">
-                          <Search size={32} />
-                        </div>
-                        <p className="text-zinc-500 text-sm">No modules found matching "{searchTerm}"</p>
-                      </div>
                     )}
                   </div>
                 </div>

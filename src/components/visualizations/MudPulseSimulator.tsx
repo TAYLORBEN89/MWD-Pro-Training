@@ -92,7 +92,9 @@ export const MudPulseSimulator: React.FC = () => {
   }, [dataStream, noise, isTransmitting]);
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl space-y-6">
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl relative overflow-hidden space-y-6 text-zinc-100">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-emerald-500/10 rounded-xl shrink-0">

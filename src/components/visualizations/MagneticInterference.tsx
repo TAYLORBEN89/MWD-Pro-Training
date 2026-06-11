@@ -111,7 +111,9 @@ export const MagneticInterference: React.FC = () => {
   const isSevere = totalInterference > 0.5;
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 border border-zinc-800 shadow-2xl">
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl relative overflow-hidden text-zinc-100">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
       <div className="flex flex-col lg:flex-row gap-8 items-center">
         {/* Visualization */}
         <div className="relative w-full max-w-[300px] mx-auto lg:mx-0">

@@ -57,23 +57,27 @@ export const SteeringSimulator: React.FC = () => {
   const isOffTarget = Math.abs(lastPos.x - targetX) > 10;
 
   return (
-    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl overflow-hidden">
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative text-zinc-100">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
       <div className="flex flex-col gap-6 sm:gap-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-indigo-500/10 rounded-xl shrink-0">
-              <Navigation className="text-indigo-500" size={24} />
+              <Navigation className="text-indigo-400" size={24} />
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 font-display">3D Steering Simulator</h3>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Directional Control & Well Path Planning</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">3D Steering Simulator</h3>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Directional Control & Well Path Planning</p>
             </div>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <button 
               onClick={() => setIsDrilling(!isDrilling)}
               className={`flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${
-                isDrilling ? 'bg-red-500 text-white' : 'bg-zinc-900 text-white'
+                isDrilling 
+                  ? 'bg-red-500 text-white' 
+                  : 'bg-zinc-800 border border-zinc-700 text-zinc-100 hover:bg-zinc-700 hover:text-white'
               }`}
             >
               {isDrilling ? <RotateCw className="animate-spin" size={14} /> : <Play size={14} />}
@@ -81,7 +85,7 @@ export const SteeringSimulator: React.FC = () => {
             </button>
             <button 
               onClick={reset}
-              className="p-2.5 bg-zinc-100 text-zinc-500 rounded-xl hover:bg-zinc-200 transition-colors flex items-center justify-center"
+              className="p-2.5 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-xl hover:bg-zinc-700 hover:text-zinc-200 transition-colors flex items-center justify-center"
             >
               <RefreshCw size={20} />
             </button>
@@ -92,12 +96,12 @@ export const SteeringSimulator: React.FC = () => {
           {/* Controls Panel */}
           <div className="lg:col-span-4 space-y-6">
             <div className="space-y-4">
-              <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Drilling Mode</p>
-              <div className="flex gap-2 p-1 bg-zinc-100 rounded-2xl">
+              <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Drilling Mode</p>
+              <div className="flex gap-2 p-1 bg-zinc-950 rounded-2xl border border-zinc-800">
                 <button 
                   onClick={() => setMode('rotate')}
                   className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
-                    mode === 'rotate' ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-700'
+                    mode === 'rotate' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 >
                   Rotate
@@ -105,7 +109,7 @@ export const SteeringSimulator: React.FC = () => {
                 <button 
                   onClick={() => setMode('slide')}
                   className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
-                    mode === 'slide' ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-700'
+                    mode === 'slide' ? 'bg-zinc-800 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-300'
                   }`}
                 >
                   Slide
@@ -115,17 +119,17 @@ export const SteeringSimulator: React.FC = () => {
 
             <div className={`space-y-4 transition-opacity duration-500 ${mode === 'rotate' ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
               <div className="flex justify-between items-center">
-                <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Toolface Orientation</p>
-                <span className="text-xs font-mono font-bold text-indigo-600">{toolface}°</span>
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Toolface Orientation</p>
+                <span className="text-xs font-mono font-bold text-indigo-400">{toolface}°</span>
               </div>
               
-              <div className="relative aspect-square bg-zinc-50 rounded-full border-4 border-zinc-100 flex items-center justify-center p-8">
-                <div className="absolute inset-4 border-2 border-dashed border-zinc-200 rounded-full" />
+              <div className="relative aspect-square bg-zinc-950 rounded-full border-4 border-zinc-800 flex items-center justify-center p-8">
+                <div className="absolute inset-4 border-2 border-dashed border-zinc-800/60 rounded-full" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="absolute top-2 text-[10px] font-bold text-zinc-400">BUILD</span>
-                  <span className="absolute bottom-2 text-[10px] font-bold text-zinc-400">DROP</span>
-                  <span className="absolute right-2 text-[10px] font-bold text-zinc-400">RIGHT</span>
-                  <span className="absolute left-2 text-[10px] font-bold text-zinc-400">LEFT</span>
+                  <span className="absolute top-2 text-[10px] font-bold text-zinc-500">BUILD</span>
+                  <span className="absolute bottom-2 text-[10px] font-bold text-zinc-500">DROP</span>
+                  <span className="absolute right-2 text-[10px] font-bold text-zinc-500">RIGHT</span>
+                  <span className="absolute left-2 text-[10px] font-bold text-zinc-500">LEFT</span>
                 </div>
                 
                 <motion.div 
@@ -149,10 +153,10 @@ export const SteeringSimulator: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 flex items-center gap-3">
-              <Compass className="text-indigo-500" size={20} />
-              <p className="text-xs text-indigo-700 leading-relaxed font-medium">
-                <span className="font-bold">DD Tip:</span> Sliding with toolface at 90° will turn the well to the right. Rotating will tend to drop inclination or hold the current path.
+            <div className="bg-indigo-500/10 p-4 rounded-2xl border border-indigo-500/20 flex items-center gap-3">
+              <Compass className="text-indigo-400" size={20} />
+              <p className="text-xs text-indigo-300 leading-relaxed font-medium">
+                <span className="font-bold text-indigo-200">DD Tip:</span> Sliding with toolface at 90° will turn the well to the right. Rotating will tend to drop inclination or hold the current path.
               </p>
             </div>
           </div>

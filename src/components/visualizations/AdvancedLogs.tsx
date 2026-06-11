@@ -52,9 +52,9 @@ export const AdvancedLogs: React.FC = () => {
   const currentLog = logTypes[activeLog];
 
   return (
-    <div className="bg-zinc-900 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
-      {/* Background Grid Accent */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
 
       <div className="relative flex flex-col gap-6 sm:gap-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

@@ -57,30 +57,34 @@ export const GeosteeringInterpretation: React.FC = () => {
   const inZone = currentGamma < 60 && currentGamma > 0;
 
   return (
-    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl overflow-hidden">
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative text-zinc-100">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
       <div className="flex flex-col gap-6 sm:gap-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-emerald-500/10 rounded-xl shrink-0">
-              <Layers className="text-emerald-500" size={24} />
+              <Layers className="text-emerald-400" size={24} />
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 font-display">Geosteering Interpretation Lab</h3>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Real-Time Formation Correlation</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">Geosteering Interpretation Lab</h3>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Real-Time Formation Correlation</p>
             </div>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
             <button 
               onClick={() => setIsDrilling(!isDrilling)}
               className={`flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
-                isDrilling ? 'bg-red-500 text-white' : 'bg-zinc-900 text-white'
+                isDrilling 
+                  ? 'bg-red-500 text-white' 
+                  : 'bg-zinc-800 border border-zinc-700 text-zinc-100 hover:bg-zinc-700 hover:text-white'
               }`}
             >
               {isDrilling ? 'Stop Drilling' : 'Start Drilling'}
             </button>
             <button 
               onClick={reset}
-              className="p-2.5 bg-zinc-100 text-zinc-500 rounded-xl hover:bg-zinc-200 transition-colors flex items-center justify-center"
+              className="p-2.5 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-xl hover:bg-zinc-700 hover:text-zinc-200 transition-colors flex items-center justify-center"
             >
               <RefreshCw size={20} />
             </button>
@@ -89,11 +93,11 @@ export const GeosteeringInterpretation: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Log Viewer */}
-          <div className="lg:col-span-8 bg-zinc-900 rounded-3xl p-6 border border-zinc-800 relative h-[500px] flex gap-4">
+          <div className="lg:col-span-8 bg-zinc-950 rounded-3xl p-6 border border-zinc-800/80 relative h-[500px] flex gap-4">
             {/* Offset Log (Reference) */}
             <div className={`flex-1 flex flex-col transition-opacity duration-500 ${showOffset ? 'opacity-100' : 'opacity-10'}`}>
               <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-4 text-center">Offset Log (Planned)</p>
-              <div className="flex-1 relative border-r border-zinc-800">
+              <div className="flex-1 relative border-r border-zinc-800/60">
                 <svg className="w-full h-full" viewBox="0 0 100 400" preserveAspectRatio="none">
                   <path 
                     d={`M ${formationData.map((f, i) => `${f.gamma / 2},${i * (400 / (formationData.length - 1))}`).join(' L ')}`}
@@ -103,7 +107,7 @@ export const GeosteeringInterpretation: React.FC = () => {
                     strokeDasharray="4 4"
                   />
                   {formationData.map((f, i) => (
-                    <text key={i} x="5" y={i * (400 / (formationData.length - 1))} className="text-[10px] fill-zinc-600 font-mono">{f.depth}</text>
+                    <text key={i} x="5" y={i * (400 / (formationData.length - 1))} className="text-[10px] fill-zinc-650 fill-zinc-500 font-mono">{f.depth}</text>
                   ))}
                 </svg>
               </div>
@@ -112,7 +116,7 @@ export const GeosteeringInterpretation: React.FC = () => {
             {/* Real-Time Log */}
             <div className="flex-1 flex flex-col">
               <p className="text-[10px] font-bold text-white uppercase tracking-widest mb-4 text-center">Real-Time Gamma (MWD)</p>
-              <div className="flex-1 relative bg-zinc-800/30 rounded-xl border border-zinc-700/50">
+              <div className="flex-1 relative bg-zinc-900/30 rounded-xl border border-zinc-800">
                 <svg className="w-full h-full" viewBox="0 0 200 400" preserveAspectRatio="none">
                   {/* Grid Lines */}
                   <line x1="60" y1="0" x2="60" y2="400" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
@@ -144,7 +148,7 @@ export const GeosteeringInterpretation: React.FC = () => {
 
             {/* Legend/Stats Overlay */}
             <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-              <div className="bg-zinc-800/90 p-3 rounded-xl border border-zinc-700 backdrop-blur-sm">
+              <div className="bg-zinc-900/90 p-3 rounded-xl border border-zinc-855 border-zinc-800 backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-2">
                   <div className={`w-2 h-2 rounded-full ${inZone ? 'bg-emerald-500' : 'bg-red-500'}`} />
                   <span className="text-[10px] font-bold text-white uppercase tracking-widest">
@@ -174,8 +178,8 @@ export const GeosteeringInterpretation: React.FC = () => {
 
           {/* Interpretation Panel */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 space-y-4">
-              <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Geological Interpretation</h4>
+            <div className="bg-zinc-950 rounded-2xl p-6 border border-zinc-800/80 space-y-4">
+              <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Geological Interpretation</h4>
               <div className="space-y-3">
                 {[
                   { id: 'shale', label: 'Entering Shale Cap', condition: currentGamma > 120 },
@@ -186,35 +190,35 @@ export const GeosteeringInterpretation: React.FC = () => {
                     key={item.id}
                     className={`p-4 rounded-xl border transition-all flex items-center gap-3 ${
                       item.condition 
-                        ? 'bg-white border-zinc-900 shadow-sm' 
-                        : 'bg-zinc-100 border-transparent opacity-50'
+                        ? 'bg-zinc-800 border-zinc-700 text-white shadow-sm' 
+                        : 'bg-zinc-900/40 border-transparent opacity-40 text-zinc-500'
                     }`}
                   >
-                    {item.condition ? <CheckCircle2 size={18} className="text-emerald-500" /> : <div className="w-[18px] h-[18px] rounded-full border-2 border-zinc-200" />}
-                    <span className="text-sm font-bold text-zinc-900">{item.label}</span>
+                    {item.condition ? <CheckCircle2 size={18} className="text-emerald-500" /> : <div className="w-[18px] h-[18px] rounded-full border-2 border-zinc-700" />}
+                    <span className={`text-sm font-bold ${item.condition ? 'text-white' : 'text-zinc-500'}`}>{item.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-amber-50 p-4 rounded-2xl border border-amber-100 flex items-center gap-3">
+            <div className="bg-amber-500/10 p-4 rounded-2xl border border-amber-500/20 flex items-center gap-3">
               <AlertTriangle className="text-amber-500" size={20} />
-              <p className="text-xs text-amber-700 leading-relaxed font-medium">
-                <span className="font-bold">Geosteering Tip:</span> Gamma ray lag means the tool sees the formation several feet after the bit. Always account for the "Gamma-to-Bit" distance when making steering calls.
+              <p className="text-xs text-amber-300 leading-relaxed font-medium">
+                <span className="font-bold text-amber-200">Geosteering Tip:</span> Gamma ray lag means the tool sees the formation several feet after the bit. Always account for the "Gamma-to-Bit" distance when making steering calls.
               </p>
             </div>
 
-            <div className="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 space-y-4">
+            <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800/80 space-y-4">
               <div className="flex items-center gap-2">
-                <Target size={16} className="text-emerald-500" />
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Steering Decision</h4>
+                <Target size={16} className="text-emerald-400" />
+                <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Steering Decision</h4>
               </div>
-              <p className="text-xs text-zinc-500 leading-relaxed">Based on current Gamma trends, what is your recommendation to the Directional Driller?</p>
+              <p className="text-xs text-zinc-400 leading-relaxed font-sans">Based on current Gamma trends, what is your recommendation to the Directional Driller?</p>
               <div className="grid grid-cols-2 gap-2">
-                <button className="bg-zinc-800 text-white py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors">Build Angle</button>
-                <button className="bg-zinc-800 text-white py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors">Drop Angle</button>
-                <button className="bg-zinc-800 text-white py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors">Hold Path</button>
-                <button className="bg-zinc-800 text-white py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-700 transition-colors">Check Offset</button>
+                <button className="bg-zinc-900 border border-zinc-800 text-zinc-300 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-850 hover:text-white hover:border-zinc-700 transition-colors">Build Angle</button>
+                <button className="bg-zinc-900 border border-zinc-800 text-zinc-300 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-850 hover:text-white hover:border-zinc-700 transition-colors">Drop Angle</button>
+                <button className="bg-zinc-900 border border-zinc-800 text-zinc-300 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-850 hover:text-white hover:border-zinc-700 transition-colors">Hold Path</button>
+                <button className="bg-zinc-900 border border-zinc-800 text-zinc-300 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-850 hover:text-white hover:border-zinc-700 transition-colors">Check Offset</button>
               </div>
             </div>
           </div>

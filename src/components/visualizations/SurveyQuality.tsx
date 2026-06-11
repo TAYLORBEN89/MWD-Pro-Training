@@ -26,33 +26,35 @@ export const SurveyQuality: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-200 shadow-xl overflow-hidden">
+    <div className="bg-zinc-950 rounded-3xl p-4 sm:p-6 md:p-8 border border-zinc-800 shadow-2xl overflow-hidden relative text-zinc-100">
+      {/* Background Tech Mesh */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
       <div className="flex flex-col gap-6 sm:gap-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-indigo-500/10 rounded-xl shrink-0">
-              <Compass className="text-indigo-500" size={24} />
+              <Compass className="text-indigo-400" size={24} />
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 font-display">Survey Quality Control Lab</h3>
-              <p className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Validation & Error Analysis</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white font-display">Survey Quality Control Lab</h3>
+              <p className="text-[10px] text-zinc-400 uppercase tracking-widest font-bold">Validation & Error Analysis</p>
             </div>
           </div>
-          <div className="bg-zinc-100 px-4 py-2 rounded-xl border border-zinc-200 shrink-0 self-end sm:self-auto">
+          <div className="bg-zinc-950 px-4 py-2 rounded-xl border border-zinc-800 shrink-0 self-end sm:self-auto">
             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Validated</p>
-            <p className="text-xl font-mono text-zinc-900 leading-none">{score}</p>
+            <p className="text-xl font-mono text-white leading-none">{score}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Survey Data Panel */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="bg-zinc-50 rounded-2xl p-6 border border-zinc-100 space-y-6">
+            <div className="bg-zinc-950 rounded-2xl p-6 border border-zinc-805 border-zinc-800/80 space-y-6">
               <div className="flex justify-between items-center">
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Survey Parameters @ {survey.depth} ft</h4>
+                <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Survey Parameters @ {survey.depth} ft</h4>
                 <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                  survey.status === 'Good' ? 'bg-emerald-100 text-emerald-700' : 
-                  survey.status === 'Warning' ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'
+                  survey.status === 'Good' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
+                  survey.status === 'Warning' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' : 'bg-rose-500/10 text-rose-455 text-rose-400 border border-rose-500/20'
                 }`}>
                   {survey.status} Data
                 </div>
@@ -67,13 +69,13 @@ export const SurveyQuality: React.FC = () => {
                   { label: 'Dip Angle', value: `${survey.dip}°`, icon: Target, alert: Math.abs(survey.dip - 65) > 2 }
                 ].map((param, i) => (
                   <div key={i} className={`p-4 rounded-2xl border transition-all ${
-                    param.alert ? 'bg-red-50 border-red-200' : 'bg-white border-zinc-200'
+                    param.alert ? 'bg-rose-950/40 border-rose-900/50 text-rose-300' : 'bg-zinc-900 border-zinc-800 text-zinc-350 hover:border-zinc-700'
                   }`}>
                     <div className="flex items-center gap-2 mb-2">
-                      <param.icon size={14} className={param.alert ? 'text-red-500' : 'text-zinc-400'} />
+                       <param.icon size={14} className={param.alert ? 'text-rose-400' : 'text-zinc-500'} />
                       <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{param.label}</p>
                     </div>
-                    <p className={`text-lg font-mono font-bold ${param.alert ? 'text-red-600' : 'text-zinc-900'}`}>{param.value}</p>
+                    <p className={`text-lg font-mono font-bold ${param.alert ? 'text-rose-400' : 'text-white'}`}>{param.value}</p>
                   </div>
                 ))}
               </div>
@@ -82,14 +84,14 @@ export const SurveyQuality: React.FC = () => {
             <div className="flex gap-4">
               <button 
                 onClick={() => handleValidate(true)}
-                className="flex-1 bg-emerald-500 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
+                className="flex-1 bg-emerald-600 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-500/10 flex items-center justify-center gap-2"
               >
                 <CheckCircle2 size={20} />
                 Accept Survey
               </button>
               <button 
                 onClick={() => handleValidate(false)}
-                className="flex-1 bg-red-500 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-red-600 transition-all shadow-lg shadow-red-500/20 flex items-center justify-center gap-2"
+                className="flex-1 bg-rose-600 text-white py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-rose-500 transition-all shadow-lg shadow-rose-500/10 flex items-center justify-center gap-2"
               >
                 <AlertTriangle size={20} />
                 Reject Survey
@@ -99,9 +101,9 @@ export const SurveyQuality: React.FC = () => {
 
           {/* Analysis Panel */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 space-y-6">
+            <div className="bg-zinc-950 rounded-2xl p-6 border border-zinc-800/80 space-y-6">
               <div className="flex justify-between items-center">
-                <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Error Ellipse Analysis</h4>
+                <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Error Ellipse Analysis</h4>
                 <button 
                   onClick={() => setShowCorrections(!showCorrections)}
                   className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest hover:text-indigo-300 transition-colors"
@@ -110,10 +112,10 @@ export const SurveyQuality: React.FC = () => {
                 </button>
               </div>
 
-              <div className="aspect-square bg-zinc-800/50 rounded-full border-2 border-zinc-700 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-full h-[1px] bg-zinc-700" />
-                  <div className="h-full w-[1px] bg-zinc-700" />
+              <div className="aspect-square bg-zinc-900/50 rounded-full border-2 border-zinc-800 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center border-zinc-800">
+                  <div className="w-full h-[1px] bg-zinc-800/80" />
+                  <div className="h-full w-[1px] bg-zinc-800/80" />
                 </div>
                 
                 {/* Error Ellipse */}
@@ -123,7 +125,7 @@ export const SurveyQuality: React.FC = () => {
                     opacity: showCorrections ? 0.5 : 1,
                     rotate: survey.az 
                   }}
-                  className="w-40 h-24 border-2 border-red-500/50 bg-red-500/10 rounded-[100%] relative"
+                  className="w-40 h-24 border-2 border-red-500/40 bg-red-500/10 rounded-[100%] relative"
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-1 h-1 bg-red-500 rounded-full" />
@@ -134,7 +136,7 @@ export const SurveyQuality: React.FC = () => {
                   <motion.div 
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    className="absolute w-20 h-12 border-2 border-emerald-500/50 bg-emerald-500/10 rounded-[100%]"
+                    className="absolute w-20 h-12 border-2 border-emerald-500/40 bg-emerald-500/10 rounded-[100%]"
                   />
                 )}
 
@@ -145,19 +147,19 @@ export const SurveyQuality: React.FC = () => {
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Correction Methods</p>
                 <div className="grid grid-cols-2 gap-2">
                   <div className={`p-2 rounded-lg border text-[10px] font-bold uppercase tracking-widest text-center transition-all ${
-                    showCorrections ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400' : 'bg-zinc-800 border-zinc-700 text-zinc-600'
+                    showCorrections ? 'bg-indigo-500/15 border-indigo-500 text-indigo-300 shadow-sm shadow-indigo-500/5' : 'bg-zinc-800 border-zinc-700 text-zinc-650 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'
                   }`}>IFR Correction</div>
                   <div className={`p-2 rounded-lg border text-[10px] font-bold uppercase tracking-widest text-center transition-all ${
-                    showCorrections ? 'bg-indigo-500/10 border-indigo-500 text-indigo-400' : 'bg-zinc-800 border-zinc-700 text-zinc-600'
+                    showCorrections ? 'bg-indigo-500/15 border-indigo-500 text-indigo-300 shadow-sm shadow-indigo-500/5' : 'bg-zinc-800 border-zinc-700 text-zinc-650 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'
                   }`}>MSAC Analysis</div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 flex items-center gap-3">
-              <ShieldCheck className="text-indigo-500" size={20} />
-              <p className="text-xs text-indigo-700 leading-relaxed font-medium">
-                <span className="font-bold">QC Tip:</span> G-Total should always be close to 1.000 G. Significant deviations indicate magnetic interference or tool vibration during the survey.
+            <div className="bg-indigo-500/10 p-4 rounded-2xl border border-indigo-500/20 flex items-center gap-3">
+              <ShieldCheck className="text-indigo-400" size={20} />
+              <p className="text-xs text-indigo-300 leading-relaxed font-medium">
+                <span className="font-bold text-indigo-200">QC Tip:</span> G-Total should always be close to 1.000 G. Significant deviations indicate magnetic interference or tool vibration during the survey.
               </p>
             </div>
           </div>
