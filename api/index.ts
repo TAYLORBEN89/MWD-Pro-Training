@@ -522,6 +522,8 @@ process.on("uncaughtException", (error) => {
   console.error("CRITICAL: Uncaught Exception caught:", error);
 });
 
-startServer();
+startServer().catch((err) => {
+  console.error("CRITICAL: Error starting the local backend server:", err);
+});
 
 export default app;

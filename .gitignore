@@ -9,6 +9,35 @@ coverage/
 google-services.json
 ios/App/App/GoogleService-Info.plist
 
-# Capacitor generated assets
+# Gradle and Android intermediate directories
+.gradle/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+*.aar
+*.ap_
+*.aab
+*.dex
+*.class
+
+# iOS intermediate directories and files
+ios/App/build/
+ios/App/Pods/
+ios/App/output/
+ios/DerivedData/
+ios/userdata/
+ios/xcuserdata/
+
+# Capacitor generated assets and plugin outputs
 android/app/src/main/assets/public/
 ios/App/App/public/
+capacitor-cordova-android-plugins/
+capacitor-cordova-ios-plugins/
+android/app/src/main/assets/capacitor.config.json
+android/app/src/main/assets/capacitor.plugins.json
+android/app/src/main/res/xml/config.xml
+ios/App/App/capacitor.config.json
+ios/App/App/config.xml
+
