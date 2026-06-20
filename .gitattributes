@@ -3,3 +3,6 @@ android/** linguist-vendored
 ios/** linguist-vendored
 android/** linguist-generated
 ios/** linguist-generated
+
+# Force git to treat PNG files as raw binary data (prevents CRLF line ending corruption on Windows clones)
+*.png binary

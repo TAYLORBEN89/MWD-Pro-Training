@@ -128,6 +128,7 @@ export default function App() {
   const [serverTime, setServerTime] = useState<string | null>(null);
   const [serverConfig, setServerConfig] = useState<{hasPubKey: boolean, hasSecKey: boolean, hasAppUrl: boolean} | null>(null);
   const [apiStatus, setApiStatus] = useState<'loading' | 'connected' | 'error'>('loading');
+  const [badgeImageError, setBadgeImageError] = useState(false);
 
   // Unregister Service Worker to prevent caching issues in preview
   useEffect(() => {
@@ -386,12 +387,48 @@ export default function App() {
             </p>
           </div>
 
-          <button 
-            onClick={() => setHasStarted(true)}
-            className="w-full py-5 bg-emerald-500 text-zinc-900 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-500/20 active:scale-95 transition-all hover:bg-emerald-400 cursor-pointer"
-          >
-            Get Started
-          </button>
+          <div className="flex flex-col gap-4">
+            <button 
+              onClick={() => setHasStarted(true)}
+              className="w-full py-5 bg-emerald-500 text-zinc-900 rounded-2xl font-bold text-lg shadow-xl shadow-emerald-500/20 active:scale-95 transition-all hover:bg-emerald-400 cursor-pointer"
+            >
+              Get Started
+            </button>
+
+            {!badgeImageError ? (
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.mwdpro.app&utm_source=na_Med" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full flex justify-center cursor-pointer active:scale-95 transition-all"
+              >
+                <img 
+                  src="/google-play-badge.png" 
+                  alt="Get it on Google Play" 
+                  className="h-[60px] object-contain hover:brightness-110 transition-all"
+                  onError={() => setBadgeImageError(true)}
+                />
+              </a>
+            ) : (
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.mwdpro.app&utm_source=na_Med" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-3 bg-zinc-950 hover:bg-black border border-zinc-900 hover:border-emerald-500/30 text-white rounded-2xl px-5 py-3 transition-all duration-200 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] group w-full justify-center cursor-pointer"
+              >
+                <svg viewBox="0 0 512 512" className="w-6 h-6 shrink-0 transition-transform group-hover:scale-105" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M325.3 234.3L104.6 13c-5.6-3.3-12.1-5-18.9-5-11.5 0-21.8 4.7-29.2 12.3L285 248.6l40.3-14.3z" fill="#00E676" />
+                  <path d="M285 248.6l-228.5 228.3c7.4 7.6 17.7 12.3 29.2 12.3 6.8 0 13.3-1.8 18.9-5l220.7-221.3L285 248.6z" fill="#FFD600" />
+                  <path d="M500.2 238.2l-133.7-76.4-81.5 86.8 81.5 86.8 133.7-76.4c12-6.9 12-18.1 0-25z" fill="#FF1744" />
+                  <path d="M10 33.3v445.4c0 10.9 5.8 20.3 14.3 25.5L285 248.6 24.3 7.8c-8.5 5.2-14.3 14.6-14.3 25.5z" fill="#00B0FF" />
+                </svg>
+                <div className="text-left">
+                  <span className="block text-[8px] uppercase tracking-wider text-zinc-400 font-bold leading-none">NOW ON THE GOOGLE PLAY STORE</span>
+                  <span className="block text-[13px] font-semibold text-white tracking-tight mt-1 leading-none font-sans">MWD Pro: Training Essentials</span>
+                </div>
+              </a>
+            )}
+          </div>
 
           <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-bold">
             Version 4.2.15 • Professional Edition
