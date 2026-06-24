@@ -30,6 +30,21 @@ export const getApiUrl = (path: string) => {
     return finalUrl;
   }
   
-  // 4. On web or if no base provided, use the normalized relative path
+  // 4. On web, if a baseUrl is provided and is absolute, use it if it differs from current origin
+  if (baseUrl && (baseUrl.startsWith('http://') || baseUrl.startsWith('https://'))) {
+    try {
+      const currentOrigin = typeof window !== 'undefined' ? window.location.origin : '';
+      if (currentOrigin && !baseUrl.startsWith(currentOrigin)) {
+        const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+        return cleanBase.endsWith('/api') 
+          ? `${cleanBase}${handlePath.substring(4)}`
+          : `${cleanBase}${handlePath}`;
+      }
+    } catch (e) {
+      console.warn("Could not determine window origin for cross-origin API check", e);
+    }
+  }
+  
+  // 5. Default fallback to relative path for web
   return handlePath;
 };
